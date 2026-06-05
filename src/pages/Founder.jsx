@@ -367,11 +367,11 @@ export default function Founder() {
                     transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
                     className="relative shrink-0"
                   >
-                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-brand-section shadow-lg bg-slate-800">
+                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-brand-section shadow-lg bg-slate-800 relative flex items-center justify-center">
                       <img
                         src={coFounderPhoto}
                         alt="Priyanka M"
-                        className="w-full h-full object-cover"
+                        className="absolute w-[180%] h-auto max-w-none left-1/2 top-0 -translate-x-[48%]"
                         loading="lazy"
                       />
                     </div>
