@@ -26,7 +26,7 @@ export default function Connect() {
   const navigate = useNavigate();
   const whatsappUrl = "https://wa.me/919944283316?text=Hello%20Maruthu%2C%0A%0AI%20visited%20the%20M2P%20Nexus%20website%20and%20would%20like%20to%20discuss%20my%20business%20requirements.%0A%0APlease%20contact%20me.%0A%0AThank%20you.";
   const profileWhatsappUrl = "https://wa.me/919944283316?text=Hello%20Maruthu%2C%20I%20would%20like%20to%20receive%20the%20M2P%20Nexus%20Company%20Profile.%20Please%20share%20it%20with%20me.%20Thank%20you.";
-  const emailUrl = "mailto:m2pnexus2026@gmail.com?subject=Business%20Enquiry%20from%20QR%20Card";
+  const emailUrl = "mailto:hello@m2pnexus.com?subject=Business%20Enquiry%20from%20QR%20Card";
 
   return (
     <>

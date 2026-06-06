@@ -18,7 +18,7 @@ export default function Services() {
   const getEmailLink = (serviceTitle, packageName) => {
     const subject = `Price Enquiry: ${serviceTitle} - ${packageName}`;
     const body = `Hello M2P Nexus Team,\n\nI visited your website and would like to receive a price quote and further details for:\n\nService: ${serviceTitle}\nPackage: ${packageName}\n\nPlease contact me with more information.\n\nThank you.`;
-    return `mailto:m2pnexus2026@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    return `mailto:hello@m2pnexus.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const servicesList = [

@@ -26,7 +26,7 @@ export default function Footer() {
   // Exclude footer render on the Connect page
   if (location.pathname === '/connect') return null;
 
-  const emailUrl = "mailto:m2pnexus2026@gmail.com?subject=Business%20Enquiry%20from%20Website";
+  const emailUrl = "mailto:hello@m2pnexus.com?subject=Business%20Enquiry%20from%20Website";
 
   return (
     <footer className="bg-brand-primary text-slate-300 border-t border-slate-800">
@@ -102,7 +102,7 @@ export default function Footer() {
               <li className="flex items-center gap-2.5">
                 <Mail className="w-5 h-5 text-brand-accent shrink-0" />
                 <a href={emailUrl} className="hover:text-white transition-colors font-medium break-all">
-                  m2pnexus2026@gmail.com
+                  hello@m2pnexus.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5">

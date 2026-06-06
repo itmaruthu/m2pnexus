@@ -21,7 +21,7 @@ import Seo from '../components/Seo';
 
 export default function Contact() {
   const whatsappUrl = "https://wa.me/919944283316?text=Hello%20Maruthu%2C%0A%0AI%20visited%20the%20M2P%20Nexus%20website%20and%20would%20like%20to%20discuss%20my%20business%20requirements.%0A%0APlease%20contact%20me.%0A%0AThank%20you.";
-  const emailUrl = "mailto:m2pnexus2026@gmail.com?subject=Business%20Enquiry%20from%20Website";
+  const emailUrl = "mailto:hello@m2pnexus.com?subject=Business%20Enquiry%20from%20Website";
 
   const contactMethods = [
     {
@@ -45,7 +45,7 @@ export default function Contact() {
       icon: Mail,
       details: (
         <div className="font-mono text-sm mt-2 text-brand-primary font-medium break-all">
-          m2pnexus2026@gmail.com
+          hello@m2pnexus.com
         </div>
       )
     },
@@ -79,7 +79,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact Our Office - Phone, Email & Location"
-        description="Get in touch with M2P Nexus. Call +91 99442 83316, email m2pnexus2026@gmail.com, or visit us in Madurai, Tamil Nadu. Direct communication, no forms."
+        description="Get in touch with M2P Nexus. Call +91 99442 83316, email hello@m2pnexus.com, or visit us in Madurai, Tamil Nadu. Direct communication, no forms."
       />
 
       {/* Hero Section */}
