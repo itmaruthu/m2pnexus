@@ -108,7 +108,7 @@ export default function Footer() {
               <li className="flex items-center gap-2.5">
                 <Linkedin className="w-5 h-5 text-brand-accent shrink-0" />
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/company/m2-nexus/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors font-medium flex items-center gap-1"
