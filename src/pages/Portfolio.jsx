@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   Laptop,
   Brain,
@@ -11,7 +12,9 @@ import {
   ShieldCheck,
   Zap,
   Settings,
-  Layers
+  Layers,
+  ShoppingBag,
+  Check
 } from 'lucide-react';
 import Seo from '../components/Seo';
 import dashboardMockup from '../assets/dashboard_mockup.png';
@@ -34,17 +37,17 @@ export default function Portfolio() {
       description: 'We design and develop custom, secure corporate software platforms, billing software, and unified resource planners (ERPs) engineered to fit your specific operational structure. We avoid cookie-cutter templates in favor of high-performance code.',
       projects: [
         {
-          title: 'Bilingual GST Billing Software',
-          client: 'Karthik Traders & Provisions',
-          industry: 'Retail & Bulk Provisions',
-          problem: 'Store operators struggled with complex, English-only billing systems that frequently crashed during internet blackouts, delaying transactions.',
-          solution: 'Engineered an offline-first cashier terminal with IndexedDB local caching. Implemented bilingual (Tamil/English) invoice layout, automated GST math, and automatic background sync.',
-          stack: ['Vite', 'React.js', 'IndexedDB', 'Tailwind CSS'],
-          metrics: 'Over 15,000+ local invoices compiled with zero transactional downtime.'
+          title: 'Yuva Textiles',
+          client: 'Yuva Textiles',
+          industry: 'ERP & BILLING SOFTWARE',
+          problem: 'Yuva Textiles relied on manual billing and traditional inventory tracking, leading to slow billing during busy hours, inventory mismatches, difficult stock monitoring, and lack of centralized reporting.',
+          solution: 'Designed and developed a complete ERP-powered Billing & Inventory Management System with fast POS billing, automated GST, barcode search, inventory tracking, and PostgreSQL database.',
+          stack: ['Next.js', 'PostgreSQL', 'React'],
+          metrics: 'Reduced billing time by more than 70% and improved inventory accuracy.'
         },
         {
           title: 'Steel Industry ERP',
-          client: 'Sri Balaji Steel Rolling Mills',
+          client: 'JRK Engineering',
           industry: 'Heavy Metal Manufacturing',
           problem: 'Fragmented manual registers tracking raw scrap material receipts, melting losses, logistics, and contractor accounts led to inventory leakages.',
           solution: 'Created a centralized Web ERP system featuring real-time weighbridge integrations, automated steel receipt calculations, and unified billing logs.',
@@ -53,7 +56,7 @@ export default function Portfolio() {
         },
         {
           title: 'Agribusiness Supply Chain Portal',
-          client: 'Pandian Agro Trading Co.',
+          client: 'Shanmugha Coconuts',
           industry: 'Agribusiness & Bulk Trade',
           problem: 'Manual tracking of crop batch weights, transport logs, and commission allocations created constant settlement friction with farmers.',
           solution: 'Built a responsive supply chain database app that integrates scales, automates driver fuel allowances, and generates commission settlements.',
@@ -205,65 +208,318 @@ export default function Portfolio() {
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {category.projects.map((project, idx) => (
-                      <div
-                        key={idx}
-                        className="bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-                      >
-                        {/* Upper Section */}
-                        <div className="p-6 md:p-8 space-y-6">
-                          {/* Case Header */}
-                          <div className="flex justify-between items-start gap-4">
-                            <div className="space-y-1">
-                              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-white border border-brand-border px-2 py-0.5 rounded-full font-heading">
-                                {project.industry}
-                              </span>
-                              <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1">
-                                {project.title}
-                              </h4>
-                              <p className="text-xs text-brand-secondary font-medium font-heading">Client: {project.client}</p>
+                    {category.projects.map((project, idx) => {
+                      const isFirstCard = category.id === 'technology' && idx === 0;
+
+                      if (isFirstCard) {
+                        return (
+                          <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 25 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+                            className="group bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 ease-out hover:-translate-y-2 flex flex-col justify-between"
+                          >
+                            {/* Upper Section */}
+                            <div className="p-6 md:p-8 space-y-5 flex-1 flex flex-col min-h-0">
+                              {/* Case Header */}
+                              <div className="space-y-1">
+                                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2.5 py-0.5 rounded-full font-heading">
+                                  {project.industry}
+                                </span>
+                                <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1.5 flex items-center gap-2">
+                                  <ShoppingBag className="w-5 h-5 text-indigo-600 shrink-0" />
+                                  <span>{project.title}</span>
+                                </h4>
+                              </div>
+
+                              {/* Scrollable details container */}
+                              <div className="overflow-y-auto max-h-[385px] pr-2 space-y-5 text-xs text-left custom-scrollbar scrollbar-thin">
+                                {/* Project Overview */}
+                                <div className="space-y-1">
+                                  <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Project Overview</span>
+                                  <p className="text-brand-text leading-relaxed text-xs">
+                                    Developed a complete ERP-powered Billing & Inventory Management System for Yuva Textiles to streamline daily billing operations, inventory control, customer management, supplier records, GST invoicing, and business reporting.
+                                  </p>
+                                  <p className="text-brand-text leading-relaxed text-xs pt-1">
+                                    The software replaces manual bookkeeping with an intelligent digital workflow, improving operational efficiency and reducing billing time.
+                                  </p>
+                                </div>
+
+                                {/* Business Challenges */}
+                                <div className="space-y-2">
+                                  <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">Business Challenges</span>
+                                  <p className="text-brand-text text-xs leading-relaxed">
+                                    Yuva Textiles relied on manual billing and traditional inventory tracking, leading to:
+                                  </p>
+                                  <ul className="space-y-1.5 pl-1">
+                                    {[
+                                      "Slow billing during busy hours",
+                                      "Inventory mismatches",
+                                      "Difficult stock monitoring",
+                                      "Manual GST calculations",
+                                      "Customer purchase history was not easily accessible",
+                                      "Supplier purchase records were difficult to maintain",
+                                      "No centralized reporting system"
+                                    ].map((challenge, i) => (
+                                      <li key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
+                                        <span className="text-red-500 font-bold shrink-0 mt-0.5">•</span>
+                                        <span>{challenge}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+
+                                {/* Our Solution */}
+                                <div className="space-y-2">
+                                  <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Our Solution</span>
+                                  <p className="text-brand-text text-xs leading-relaxed">
+                                    Designed and developed a modern Billing & Inventory Management System featuring:
+                                  </p>
+                                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 pl-1">
+                                    {[
+                                      "Fast POS Billing",
+                                      "GST Invoice Generation",
+                                      "Barcode Product Management",
+                                      "Product Categories",
+                                      "Inventory & Stock Tracking",
+                                      "Purchase Management",
+                                      "Supplier Management",
+                                      "Customer Management",
+                                      "Daily Sales Reports",
+                                      "Dashboard Analytics",
+                                      "Secure Login System",
+                                      "User Role Management",
+                                      "Invoice Printing",
+                                      "Stock Alerts",
+                                      "Business Reports",
+                                      "PostgreSQL Database"
+                                    ].map((sol, i) => (
+                                      <div key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
+                                        <span className="text-brand-secondary font-bold shrink-0">✓</span>
+                                        <span>{sol}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                  <p className="text-brand-primary font-medium leading-relaxed text-xs pt-1">
+                                    The system provides an intuitive interface that enables staff to complete billing operations quickly while keeping inventory synchronized in real time.
+                                  </p>
+                                </div>
+
+                                {/* Key Features */}
+                                <div className="space-y-2">
+                                  <span className="text-[10px] font-bold uppercase text-brand-accent font-heading block">Key Features</span>
+                                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 pl-1">
+                                    {[
+                                      "Lightning-fast billing",
+                                      "Automated GST calculation",
+                                      "Barcode-enabled product search",
+                                      "Customer database",
+                                      "Supplier management",
+                                      "Inventory dashboard",
+                                      "Purchase & Sales history",
+                                      "Low-stock notifications",
+                                      "Invoice generation",
+                                      "Business analytics"
+                                    ].map((feat, i) => (
+                                      <div key={i} className="flex items-center gap-1.5 text-brand-text leading-relaxed">
+                                        <Check className="w-3.5 h-3.5 text-brand-accent shrink-0" />
+                                        <span>{feat}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+
+                                {/* Business Impact */}
+                                <div className="space-y-2">
+                                  <span className="text-[10px] font-bold uppercase text-emerald-600 font-heading block">Business Impact</span>
+                                  <div className="space-y-1.5 pl-1">
+                                    {[
+                                      "Reduced billing time by more than 70%",
+                                      "Improved inventory accuracy",
+                                      "Eliminated manual billing errors",
+                                      "Faster customer checkout",
+                                      "Better stock visibility",
+                                      "Simplified GST compliance",
+                                      "Centralized business management",
+                                      "Increased operational productivity"
+                                    ].map((impact, i) => (
+                                      <div key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
+                                        <span className="text-emerald-500 font-bold shrink-0">✔</span>
+                                        <span>{impact}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Lower Section */}
+                            <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
+                              <div className="flex flex-wrap gap-2 pt-2">
+                                {project.stack.map((tech, i) => (
+                                  <span
+                                    key={i}
+                                    className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600 transition-all duration-300 group-hover:border-blue-400 group-hover:shadow-[0_0_10px_rgba(30,58,138,0.2)] group-hover:bg-blue-50/10"
+                                  >
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
+
+                              <div className="pt-2 flex flex-wrap gap-4 justify-between items-center text-xs">
+                                <button
+                                  onClick={() => navigate('/contact')}
+                                  className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
+                                >
+                                  View Project Details <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                                </button>
+                                <button
+                                  onClick={() => navigate('/contact')}
+                                  className="font-bold text-brand-accent hover:text-emerald-600 flex items-center gap-1 cursor-pointer"
+                                >
+                                  Enquire About This Project <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                                </button>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      }
+
+                      const isSecondCard = category.id === 'technology' && idx === 1;
+
+                      if (isSecondCard) {
+                        return (
+                          <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 25 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+                            className="group bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 ease-out hover:-translate-y-2 flex flex-col justify-between"
+                          >
+                            {/* Upper Section */}
+                            <div className="p-6 md:p-8 space-y-6 flex-1 flex flex-col min-h-0">
+                              {/* Case Header */}
+                              <div className="space-y-1">
+                                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2.5 py-0.5 rounded-full font-heading">
+                                  {project.industry}
+                                </span>
+                                <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1.5">
+                                  {project.title}
+                                </h4>
+                                <p className="text-xs text-brand-secondary font-medium font-heading">Client: {project.client}</p>
+                              </div>
+
+                              {/* Problem & Solution block */}
+                              <div className="space-y-4 text-xs md:text-sm text-left">
+                                <div className="space-y-1">
+                                  <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">The Problem</span>
+                                  <p className="text-brand-text leading-relaxed text-xs">{project.problem}</p>
+                                </div>
+                                <div className="space-y-1">
+                                  <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Our Solution</span>
+                                  <p className="text-brand-primary leading-relaxed text-xs font-medium">{project.solution}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Lower Section */}
+                            <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
+                              <div className="bg-brand-section p-3 rounded-lg border border-brand-border/60 text-xs text-left">
+                                <strong className="text-brand-secondary font-heading block mb-0.5">Proven Business Outcome:</strong>
+                                <span className="text-brand-text leading-relaxed">{project.metrics}</span>
+                              </div>
+
+                              <div className="flex flex-wrap gap-2 pt-2">
+                                {project.stack.map((tech, i) => (
+                                  <span
+                                    key={i}
+                                    className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600 transition-all duration-300 group-hover:border-blue-400 group-hover:shadow-[0_0_10px_rgba(30,58,138,0.2)] group-hover:bg-blue-50/10"
+                                  >
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
+
+                              <div className="pt-2 flex justify-between items-center text-xs">
+                                <button
+                                  onClick={() => navigate('/contact')}
+                                  className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
+                                >
+                                  Enquire about this case <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                                </button>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      }
+
+                      return (
+                        <div
+                          key={idx}
+                          className="bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                        >
+                          {/* Upper Section */}
+                          <div className="p-6 md:p-8 space-y-6">
+                            {/* Case Header */}
+                            <div className="flex justify-between items-start gap-4">
+                              <div className="space-y-1">
+                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full font-heading ${
+                                  category.id === 'technology'
+                                    ? 'inline-block bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
+                                    : 'text-slate-400 bg-white border border-brand-border'
+                                }`}>
+                                  {project.industry}
+                                </span>
+                                <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1">
+                                  {project.title}
+                                </h4>
+                                <p className="text-xs text-brand-secondary font-medium font-heading">Client: {project.client}</p>
+                              </div>
+                            </div>
+
+                            {/* Problem & Solution block */}
+                            <div className="space-y-4 text-xs md:text-sm text-left">
+                              <div className="space-y-1">
+                                <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">The Problem</span>
+                                <p className="text-brand-text leading-relaxed text-xs">{project.problem}</p>
+                              </div>
+                              <div className="space-y-1">
+                                <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Our Solution</span>
+                                <p className="text-brand-primary leading-relaxed text-xs font-medium">{project.solution}</p>
+                              </div>
                             </div>
                           </div>
 
-                          {/* Problem & Solution block */}
-                          <div className="space-y-4 text-xs md:text-sm text-left">
-                            <div className="space-y-1">
-                              <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">The Problem</span>
-                              <p className="text-brand-text leading-relaxed text-xs">{project.problem}</p>
+                          {/* Lower Section */}
+                          <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
+                            <div className="bg-brand-section p-3 rounded-lg border border-brand-border/60 text-xs text-left">
+                              <strong className="text-brand-secondary font-heading block mb-0.5">Proven Business Outcome:</strong>
+                              <span className="text-brand-text leading-relaxed">{project.metrics}</span>
                             </div>
-                            <div className="space-y-1">
-                              <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Our Solution</span>
-                              <p className="text-brand-primary leading-relaxed text-xs font-medium">{project.solution}</p>
+
+                            <div className="flex flex-wrap gap-2 pt-2">
+                              {project.stack.map((tech, i) => (
+                                <span key={i} className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600">
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+
+                            <div className="pt-2 flex justify-between items-center text-xs">
+                              <button
+                                onClick={() => navigate('/contact')}
+                                className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
+                              >
+                                Enquire about this case <ArrowRight className="w-4 h-4" />
+                              </button>
                             </div>
                           </div>
                         </div>
-
-                        {/* Lower Section */}
-                        <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
-                          <div className="bg-brand-section p-3 rounded-lg border border-brand-border/60 text-xs text-left">
-                            <strong className="text-brand-secondary font-heading block mb-0.5">Proven Business Outcome:</strong>
-                            <span className="text-brand-text leading-relaxed">{project.metrics}</span>
-                          </div>
-
-                          <div className="flex flex-wrap gap-2 pt-2">
-                            {project.stack.map((tech, i) => (
-                              <span key={i} className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600">
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-
-                          <div className="pt-2 flex justify-between items-center text-xs">
-                            <button
-                              onClick={() => navigate('/contact')}
-                              className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
-                            >
-                              Enquire about this case <ArrowRight className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
