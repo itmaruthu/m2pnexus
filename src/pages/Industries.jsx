@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -33,6 +33,7 @@ export default function Industries() {
   const whatsappUrl = "https://wa.me/919944283316?text=Hello%20Maruthu%2C%0A%0AI%20visited%20the%20M2P%20Nexus%20website%20and%20would%20like%20to%20discuss%20my%20business%20requirements.%0A%0APlease%20contact%20me.%0A%0AThank%20you.";
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
@@ -101,6 +102,17 @@ export default function Industries() {
   const handleNext = () => {
     setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
   };
+
+  // Auto-loop carousel every 2.5 seconds (2500ms), pausing on hover/interaction
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, [isPaused, testimonials.length]);
 
   const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
@@ -387,9 +399,17 @@ export default function Industries() {
           {/* 3D Coverflow Carousel Container */}
           <div
             className="relative w-full max-w-5xl mx-auto py-4 min-h-[440px] sm:min-h-[470px] flex items-center justify-center overflow-hidden [perspective:1000px]"
-            onTouchStart={handleTouchStart}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={(e) => {
+              setIsPaused(true);
+              handleTouchStart(e);
+            }}
             onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            onTouchEnd={() => {
+              handleTouchEnd();
+              setIsPaused(false);
+            }}
           >
             <div className="relative w-full h-[390px] sm:h-[420px] flex items-center justify-center [transform-style:preserve-3d]">
               {testimonials.map((t, idx) => {
