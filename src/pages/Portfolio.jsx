@@ -5,6 +5,7 @@ import {
   Laptop,
   Brain,
   Users,
+  TrendingUp,
   CheckCircle,
   Target,
   ArrowRight,
@@ -19,9 +20,360 @@ import {
 import Seo from '../components/Seo';
 import dashboardMockup from '../assets/dashboard_mockup.png';
 
+// Reusable Case Study Card Component matching Technology Solutions design system exactly
+function CaseStudyCard({ project, idx, navigate }) {
+  const isYuvaTextiles = project.title === 'Yuva Textiles';
+
+  if (isYuvaTextiles) {
+    return (
+      <motion.div
+        key={idx}
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+        className="group bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 ease-out hover:-translate-y-2 flex flex-col justify-between text-left"
+      >
+        {/* Upper Section */}
+        <div className="p-6 md:p-8 space-y-5 flex-1 flex flex-col min-h-0">
+          {/* Case Header */}
+          <div className="space-y-1">
+            <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2.5 py-0.5 rounded-full font-heading">
+              {project.industry}
+            </span>
+            <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1.5 flex items-center gap-2">
+              <ShoppingBag className="w-5 h-5 text-indigo-600 shrink-0" />
+              <span>{project.title}</span>
+            </h4>
+          </div>
+
+          {/* Scrollable details container */}
+          <div className="overflow-y-auto max-h-[385px] pr-2 space-y-5 text-xs text-left custom-scrollbar scrollbar-thin">
+            {/* Project Overview */}
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Project Overview</span>
+              <p className="text-brand-text leading-relaxed text-xs">
+                Developed a complete ERP-powered Billing & Inventory Management System for Yuva Textiles to streamline daily billing operations, inventory control, customer management, supplier records, GST invoicing, and business reporting.
+              </p>
+              <p className="text-brand-text leading-relaxed text-xs pt-1">
+                The software replaces manual bookkeeping with an intelligent digital workflow, improving operational efficiency and reducing billing time.
+              </p>
+            </div>
+
+            {/* Business Challenges */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">Business Challenges</span>
+              <p className="text-brand-text text-xs leading-relaxed">
+                Yuva Textiles relied on manual billing and traditional inventory tracking, leading to:
+              </p>
+              <ul className="space-y-1.5 pl-1">
+                {[
+                  "Slow billing during busy hours",
+                  "Inventory mismatches",
+                  "Difficult stock monitoring",
+                  "Manual GST calculations",
+                  "Customer purchase history was not easily accessible",
+                  "Supplier purchase records were difficult to maintain",
+                  "No centralized reporting system"
+                ].map((challenge, i) => (
+                  <li key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
+                    <span className="text-red-500 font-bold shrink-0 mt-0.5">•</span>
+                    <span>{challenge}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Our Solution */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Our Solution</span>
+              <p className="text-brand-text text-xs leading-relaxed">
+                Designed and developed a modern Billing & Inventory Management System featuring:
+              </p>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 pl-1">
+                {[
+                  "Fast POS Billing",
+                  "GST Invoice Generation",
+                  "Barcode Product Management",
+                  "Product Categories",
+                  "Inventory & Stock Tracking",
+                  "Purchase Management",
+                  "Supplier Management",
+                  "Customer Management",
+                  "Daily Sales Reports",
+                  "Dashboard Analytics",
+                  "Secure Login System",
+                  "User Role Management",
+                  "Invoice Printing",
+                  "Stock Alerts",
+                  "Business Reports",
+                  "PostgreSQL Database"
+                ].map((sol, i) => (
+                  <div key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
+                    <span className="text-brand-secondary font-bold shrink-0">✓</span>
+                    <span>{sol}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-brand-primary font-medium leading-relaxed text-xs pt-1">
+                The system provides an intuitive interface that enables staff to complete billing operations quickly while keeping inventory synchronized in real time.
+              </p>
+            </div>
+
+            {/* Key Features */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-brand-accent font-heading block">Key Features</span>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 pl-1">
+                {[
+                  "Lightning-fast billing",
+                  "Automated GST calculation",
+                  "Barcode-enabled product search",
+                  "Customer database",
+                  "Supplier management",
+                  "Inventory dashboard",
+                  "Purchase & Sales history",
+                  "Low-stock notifications",
+                  "Invoice generation",
+                  "Business analytics"
+                ].map((feat, i) => (
+                  <div key={i} className="flex items-center gap-1.5 text-brand-text leading-relaxed">
+                    <Check className="w-3.5 h-3.5 text-brand-accent shrink-0" />
+                    <span>{feat}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Business Impact */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-emerald-600 font-heading block">Business Impact</span>
+              <div className="space-y-1.5 pl-1">
+                {[
+                  "Reduced billing time by more than 70%",
+                  "Improved inventory accuracy",
+                  "Eliminated manual billing errors",
+                  "Faster customer checkout",
+                  "Better stock visibility",
+                  "Simplified GST compliance",
+                  "Centralized business management",
+                  "Increased operational productivity"
+                ].map((impact, i) => (
+                  <div key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
+                    <span className="text-emerald-500 font-bold shrink-0">✔</span>
+                    <span>{impact}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Lower Section */}
+        <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
+          <div className="flex flex-wrap gap-2 pt-2">
+            {project.stack.map((tech, i) => (
+              <span
+                key={i}
+                className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600 transition-all duration-300 group-hover:border-blue-400 group-hover:shadow-[0_0_10px_rgba(30,58,138,0.2)] group-hover:bg-blue-50/10 hover:scale-105"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className="pt-2 flex flex-wrap gap-4 justify-between items-center text-xs">
+            <button
+              onClick={() => navigate('/contact')}
+              className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
+            >
+              View Project Details <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+            </button>
+            <button
+              onClick={() => navigate('/contact')}
+              className="font-bold text-brand-accent hover:text-emerald-600 flex items-center gap-1 cursor-pointer"
+            >
+              Enquire About This Project <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  const badgeText = project.category || project.industry;
+  const challengeText = project.challenge || project.problem;
+  const tags = project.expertise || project.stack || [];
+
+  return (
+    <motion.div
+      key={idx}
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: idx * 0.1, ease: 'easeOut' }}
+      className="group bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 ease-out hover:-translate-y-2 flex flex-col justify-between text-left"
+    >
+      {/* Upper Section */}
+      <div className="p-6 md:p-8 space-y-5 flex-1 flex flex-col min-h-0">
+        {/* Case Header */}
+        <div className="space-y-1">
+          {badgeText && (
+            <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2.5 py-0.5 rounded-full font-heading">
+              {badgeText}
+            </span>
+          )}
+          <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1.5 flex items-center gap-2">
+            <ShoppingBag className="w-5 h-5 text-indigo-600 shrink-0" />
+            <span>{project.title}</span>
+          </h4>
+          {project.client && (
+            <p className="text-xs text-brand-secondary font-medium font-heading">Client: {project.client}</p>
+          )}
+        </div>
+
+        {/* Scrollable details container */}
+        <div className="overflow-y-auto max-h-[385px] pr-2 space-y-5 text-xs text-left custom-scrollbar scrollbar-thin">
+          {/* THE CHALLENGE */}
+          {challengeText && (
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">THE CHALLENGE</span>
+              <p className="text-brand-text text-xs leading-relaxed">
+                {challengeText}
+              </p>
+            </div>
+          )}
+
+          {/* OUR SOLUTION */}
+          {project.solution && (
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">OUR SOLUTION</span>
+              <p className="text-brand-text text-xs leading-relaxed">
+                {project.solution}
+              </p>
+            </div>
+          )}
+
+          {/* BUSINESS IMPACT (Array) */}
+          {project.impact && Array.isArray(project.impact) && (
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase text-emerald-600 font-heading block">BUSINESS IMPACT</span>
+              <div className="space-y-1.5 pl-1">
+                {project.impact.map((item, i) => (
+                  <div key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
+                    <span className="text-emerald-500 font-bold shrink-0">✔</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Lower Section */}
+      <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
+        {/* Proven Business Outcome Box (Metrics string) */}
+        {project.metrics && (
+          <div className="bg-brand-section p-3 rounded-lg border border-brand-border/60 text-xs text-left">
+            <strong className="text-brand-secondary font-heading block mb-0.5">Proven Business Outcome:</strong>
+            <span className="text-brand-text leading-relaxed">{project.metrics}</span>
+          </div>
+        )}
+
+        {/* Expertise / Stack tags */}
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-2">
+            {tags.map((tech, i) => (
+              <span
+                key={i}
+                className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600 transition-all duration-300 group-hover:border-blue-400 group-hover:shadow-[0_0_10px_rgba(30,58,138,0.2)] group-hover:bg-blue-50/10 hover:scale-105"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* CTA Button */}
+        <div className="pt-2 flex justify-between items-center text-xs">
+          <button
+            onClick={() => navigate('/contact')}
+            className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
+          >
+            Enquire about this case <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Portfolio() {
   const navigate = useNavigate();
   const whatsappUrl = "https://wa.me/919944283316?text=Hello%20Maruthu%2C%0A%0AI%20visited%20the%20M2P%20Nexus%20website%20and%20would%20like%20to%20discuss%20my%20business%20requirements.%0A%0APlease%20contact%20me.%0A%0AThank%20you.";
+
+  const growthCaseStudies = [
+    {
+      category: 'BUSINESS DEVELOPMENT & CLIENT ACQUISITION',
+      title: 'Scaling B2B Market Presence',
+      client: 'VMK TRADERS',
+      challenge: 'VMK TRADERS sought to strengthen its market presence and establish a structured business development approach to generate qualified industrial leads. The company required a strategic sales process capable of supporting long-term business expansion.',
+      solution: "M2P Nexus developed a comprehensive business growth strategy by refining the company's market positioning, strengthening its digital presence, implementing lead generation initiatives, and designing a structured client acquisition process aligned with its target industries.",
+      impact: [
+        'Enhanced brand visibility across target markets',
+        'Established a structured B2B lead generation process',
+        'Improved client engagement and enquiry management',
+        'Built a scalable sales pipeline for future growth'
+      ],
+      expertise: [
+        'Business Development Strategy',
+        'Lead Generation',
+        'Digital Marketing',
+        'Sales Process Consulting',
+        'Brand Positioning'
+      ]
+    },
+    {
+      category: 'BUSINESS EXPANSION',
+      title: 'Business Expansion Strategy',
+      client: 'LIYA TRADERS',
+      challenge: 'As an emerging import-export business, LIYA TRADERS required a structured business growth roadmap to increase market visibility, generate new business opportunities, and establish a strong commercial presence in domestic and international markets.',
+      solution: 'M2P Nexus designed an integrated growth strategy focused on brand positioning, digital marketing, client acquisition, and business expansion planning. We also developed targeted outreach initiatives to improve customer engagement and generate qualified business enquiries.',
+      impact: [
+        'Strengthened market positioning',
+        'Increased qualified business enquiries',
+        'Improved digital visibility and brand awareness',
+        'Established a scalable customer acquisition framework'
+      ],
+      expertise: [
+        'Business Growth Consulting',
+        'Digital Marketing Strategy',
+        'Client Acquisition',
+        'Market Expansion Planning',
+        'Brand Development'
+      ]
+    },
+    {
+      category: 'DIGITAL MARKETING & BRAND GROWTH',
+      title: 'Driving Customer Acquisition & Brand Growth',
+      client: 'Gurunanak Engineering',
+      challenge: 'Gurunanak Engineering aimed to expand its customer base in a highly competitive market while improving brand awareness and creating a predictable lead generation process for its sales team.',
+      solution: 'M2P Nexus implemented an integrated marketing and business development strategy combining social media marketing, targeted lead generation campaigns, brand positioning, and sales consultation to improve customer acquisition performance.',
+      impact: [
+        'Increased brand visibility across digital channels',
+        'Improved quality of sales enquiries',
+        'Strengthened customer engagement',
+        'Established a sustainable business development pipeline'
+      ],
+      expertise: [
+        'Client Acquisition',
+        'Digital Marketing',
+        'Social Media Management',
+        'Brand Positioning',
+        'Sales Strategy'
+      ]
+    }
+  ];
 
   const portfolioCategories = [
     {
@@ -110,13 +462,47 @@ export default function Portfolio() {
       description: 'Finding skilled developers, database managers, and AI architects is challenging. We act as your specialized technical recruitment partner, screening, vetting, and training tech talents specifically prepared to merge with your company.',
       projects: [
         {
-          title: 'Agile Engineering Team Sourcing',
-          client: 'KMS Tech Division',
-          industry: 'Software & Technology Team Sourcing',
-          problem: 'Management spent weeks screening candidates whose technical skills did not match their active code repositories, delaying roadmap deliveries.',
-          solution: 'Handled candidate filtering, designed coding tests, and conducted pre-onboarding bootcamps to align candidate skills with their codebase before day 1.',
-          stack: ['Technical Screening', 'Developer Bootcamps', 'Mentorship Frameworks'],
-          metrics: 'Reduced recruitment search cycles from 45 days to 14 days with 95% candidate retention.'
+          title: 'Building a Scalable HR Foundation',
+          client: 'JRK Engineering',
+          category: 'HR TRANSFORMATION & FRACTIONAL HR',
+          challenge: "As the organization expanded, HR activities were managed through fragmented processes with no standardized policies, recruitment framework, or structured employee lifecycle management. This created operational inefficiencies and limited the company's ability to scale its workforce effectively.",
+          solution: 'M2P Nexus established a comprehensive HR ecosystem by designing standardized policies, implementing structured recruitment workflows, developing employee lifecycle processes, and providing strategic Fractional HR leadership to align people practices with business objectives.',
+          impact: [
+            'Established a structured and scalable HR function',
+            'Streamlined recruitment and onboarding processes',
+            'Enhanced HR governance and compliance readiness',
+            'Built standardized employee management practices',
+            'Enabled leadership to focus on core business growth'
+          ],
+          expertise: [
+            'Fractional HR Partnership',
+            'HR Department Setup',
+            'Recruitment Strategy',
+            'HR Policy Development',
+            'HR Process Optimization'
+          ]
+        },
+        {
+          title: 'End-to-End Talent Acquisition & HR Transformation',
+          client: 'FDG (Fridge Door Gaskets)',
+          category: 'TALENT ACQUISITION & HR OPERATIONS',
+          challenge: 'The organization faced challenges in attracting qualified talent, maintaining consistent HR processes, and building an employee-centric workplace capable of supporting continued business growth.',
+          solution: 'M2P Nexus delivered a complete workforce transformation initiative, combining strategic talent acquisition with HR audits, process optimization, employee engagement initiatives, and ongoing Fractional HR advisory to strengthen organizational performance.',
+          impact: [
+            'Accelerated recruitment with higher-quality candidate selection',
+            'Improved workforce productivity through structured HR processes',
+            'Strengthened compliance and operational governance',
+            'Increased employee engagement and retention',
+            'Built a sustainable HR framework supporting long-term growth'
+          ],
+          expertise: [
+            'Talent Acquisition',
+            'Fractional HR Leadership',
+            'HR Audit',
+            'HR Operations Management',
+            'Employee Engagement Strategy',
+            'HR Process Improvement'
+          ]
         }
       ]
     }
@@ -153,6 +539,9 @@ export default function Portfolio() {
           </a>
           <a href="#workforce" className="text-brand-secondary hover:text-brand-primary flex items-center gap-1.5">
             <Users className="w-4 h-4 text-brand-accent" /> Workforce Solutions
+          </a>
+          <a href="#growth" className="text-brand-secondary hover:text-brand-primary flex items-center gap-1.5">
+            <TrendingUp className="w-4 h-4 text-brand-accent" /> Business Growth Solutions
           </a>
         </div>
       </div>
@@ -208,323 +597,74 @@ export default function Portfolio() {
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {category.projects.map((project, idx) => {
-                      const isFirstCard = category.id === 'technology' && idx === 0;
-
-                      if (isFirstCard) {
-                        return (
-                          <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 25 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-                            className="group bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 ease-out hover:-translate-y-2 flex flex-col justify-between"
-                          >
-                            {/* Upper Section */}
-                            <div className="p-6 md:p-8 space-y-5 flex-1 flex flex-col min-h-0">
-                              {/* Case Header */}
-                              <div className="space-y-1">
-                                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2.5 py-0.5 rounded-full font-heading">
-                                  {project.industry}
-                                </span>
-                                <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1.5 flex items-center gap-2">
-                                  <ShoppingBag className="w-5 h-5 text-indigo-600 shrink-0" />
-                                  <span>{project.title}</span>
-                                </h4>
-                              </div>
-
-                              {/* Scrollable details container */}
-                              <div className="overflow-y-auto max-h-[385px] pr-2 space-y-5 text-xs text-left custom-scrollbar scrollbar-thin">
-                                {/* Project Overview */}
-                                <div className="space-y-1">
-                                  <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Project Overview</span>
-                                  <p className="text-brand-text leading-relaxed text-xs">
-                                    Developed a complete ERP-powered Billing & Inventory Management System for Yuva Textiles to streamline daily billing operations, inventory control, customer management, supplier records, GST invoicing, and business reporting.
-                                  </p>
-                                  <p className="text-brand-text leading-relaxed text-xs pt-1">
-                                    The software replaces manual bookkeeping with an intelligent digital workflow, improving operational efficiency and reducing billing time.
-                                  </p>
-                                </div>
-
-                                {/* Business Challenges */}
-                                <div className="space-y-2">
-                                  <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">Business Challenges</span>
-                                  <p className="text-brand-text text-xs leading-relaxed">
-                                    Yuva Textiles relied on manual billing and traditional inventory tracking, leading to:
-                                  </p>
-                                  <ul className="space-y-1.5 pl-1">
-                                    {[
-                                      "Slow billing during busy hours",
-                                      "Inventory mismatches",
-                                      "Difficult stock monitoring",
-                                      "Manual GST calculations",
-                                      "Customer purchase history was not easily accessible",
-                                      "Supplier purchase records were difficult to maintain",
-                                      "No centralized reporting system"
-                                    ].map((challenge, i) => (
-                                      <li key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
-                                        <span className="text-red-500 font-bold shrink-0 mt-0.5">•</span>
-                                        <span>{challenge}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-
-                                {/* Our Solution */}
-                                <div className="space-y-2">
-                                  <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Our Solution</span>
-                                  <p className="text-brand-text text-xs leading-relaxed">
-                                    Designed and developed a modern Billing & Inventory Management System featuring:
-                                  </p>
-                                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 pl-1">
-                                    {[
-                                      "Fast POS Billing",
-                                      "GST Invoice Generation",
-                                      "Barcode Product Management",
-                                      "Product Categories",
-                                      "Inventory & Stock Tracking",
-                                      "Purchase Management",
-                                      "Supplier Management",
-                                      "Customer Management",
-                                      "Daily Sales Reports",
-                                      "Dashboard Analytics",
-                                      "Secure Login System",
-                                      "User Role Management",
-                                      "Invoice Printing",
-                                      "Stock Alerts",
-                                      "Business Reports",
-                                      "PostgreSQL Database"
-                                    ].map((sol, i) => (
-                                      <div key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
-                                        <span className="text-brand-secondary font-bold shrink-0">✓</span>
-                                        <span>{sol}</span>
-                                      </div>
-                                    ))}
-                                  </div>
-                                  <p className="text-brand-primary font-medium leading-relaxed text-xs pt-1">
-                                    The system provides an intuitive interface that enables staff to complete billing operations quickly while keeping inventory synchronized in real time.
-                                  </p>
-                                </div>
-
-                                {/* Key Features */}
-                                <div className="space-y-2">
-                                  <span className="text-[10px] font-bold uppercase text-brand-accent font-heading block">Key Features</span>
-                                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 pl-1">
-                                    {[
-                                      "Lightning-fast billing",
-                                      "Automated GST calculation",
-                                      "Barcode-enabled product search",
-                                      "Customer database",
-                                      "Supplier management",
-                                      "Inventory dashboard",
-                                      "Purchase & Sales history",
-                                      "Low-stock notifications",
-                                      "Invoice generation",
-                                      "Business analytics"
-                                    ].map((feat, i) => (
-                                      <div key={i} className="flex items-center gap-1.5 text-brand-text leading-relaxed">
-                                        <Check className="w-3.5 h-3.5 text-brand-accent shrink-0" />
-                                        <span>{feat}</span>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-
-                                {/* Business Impact */}
-                                <div className="space-y-2">
-                                  <span className="text-[10px] font-bold uppercase text-emerald-600 font-heading block">Business Impact</span>
-                                  <div className="space-y-1.5 pl-1">
-                                    {[
-                                      "Reduced billing time by more than 70%",
-                                      "Improved inventory accuracy",
-                                      "Eliminated manual billing errors",
-                                      "Faster customer checkout",
-                                      "Better stock visibility",
-                                      "Simplified GST compliance",
-                                      "Centralized business management",
-                                      "Increased operational productivity"
-                                    ].map((impact, i) => (
-                                      <div key={i} className="flex items-start gap-1.5 text-brand-text leading-relaxed">
-                                        <span className="text-emerald-500 font-bold shrink-0">✔</span>
-                                        <span>{impact}</span>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Lower Section */}
-                            <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
-                              <div className="flex flex-wrap gap-2 pt-2">
-                                {project.stack.map((tech, i) => (
-                                  <span
-                                    key={i}
-                                    className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600 transition-all duration-300 group-hover:border-blue-400 group-hover:shadow-[0_0_10px_rgba(30,58,138,0.2)] group-hover:bg-blue-50/10"
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
-
-                              <div className="pt-2 flex flex-wrap gap-4 justify-between items-center text-xs">
-                                <button
-                                  onClick={() => navigate('/contact')}
-                                  className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
-                                >
-                                  View Project Details <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-                                </button>
-                                <button
-                                  onClick={() => navigate('/contact')}
-                                  className="font-bold text-brand-accent hover:text-emerald-600 flex items-center gap-1 cursor-pointer"
-                                >
-                                  Enquire About This Project <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-                                </button>
-                              </div>
-                            </div>
-                          </motion.div>
-                        );
-                      }
-
-                      const isSecondCard = category.id === 'technology' && idx === 1;
-
-                      if (isSecondCard) {
-                        return (
-                          <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 25 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-                            className="group bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 ease-out hover:-translate-y-2 flex flex-col justify-between"
-                          >
-                            {/* Upper Section */}
-                            <div className="p-6 md:p-8 space-y-6 flex-1 flex flex-col min-h-0">
-                              {/* Case Header */}
-                              <div className="space-y-1">
-                                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2.5 py-0.5 rounded-full font-heading">
-                                  {project.industry}
-                                </span>
-                                <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1.5">
-                                  {project.title}
-                                </h4>
-                                <p className="text-xs text-brand-secondary font-medium font-heading">Client: {project.client}</p>
-                              </div>
-
-                              {/* Problem & Solution block */}
-                              <div className="space-y-4 text-xs md:text-sm text-left">
-                                <div className="space-y-1">
-                                  <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">The Problem</span>
-                                  <p className="text-brand-text leading-relaxed text-xs">{project.problem}</p>
-                                </div>
-                                <div className="space-y-1">
-                                  <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Our Solution</span>
-                                  <p className="text-brand-primary leading-relaxed text-xs font-medium">{project.solution}</p>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Lower Section */}
-                            <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
-                              <div className="bg-brand-section p-3 rounded-lg border border-brand-border/60 text-xs text-left">
-                                <strong className="text-brand-secondary font-heading block mb-0.5">Proven Business Outcome:</strong>
-                                <span className="text-brand-text leading-relaxed">{project.metrics}</span>
-                              </div>
-
-                              <div className="flex flex-wrap gap-2 pt-2">
-                                {project.stack.map((tech, i) => (
-                                  <span
-                                    key={i}
-                                    className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600 transition-all duration-300 group-hover:border-blue-400 group-hover:shadow-[0_0_10px_rgba(30,58,138,0.2)] group-hover:bg-blue-50/10"
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
-
-                              <div className="pt-2 flex justify-between items-center text-xs">
-                                <button
-                                  onClick={() => navigate('/contact')}
-                                  className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
-                                >
-                                  Enquire about this case <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-                                </button>
-                              </div>
-                            </div>
-                          </motion.div>
-                        );
-                      }
-
-                      return (
-                        <div
-                          key={idx}
-                          className="bg-brand-section border border-brand-border rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-                        >
-                          {/* Upper Section */}
-                          <div className="p-6 md:p-8 space-y-6">
-                            {/* Case Header */}
-                            <div className="flex justify-between items-start gap-4">
-                              <div className="space-y-1">
-                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full font-heading ${
-                                  category.id === 'technology'
-                                    ? 'inline-block bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
-                                    : 'text-slate-400 bg-white border border-brand-border'
-                                }`}>
-                                  {project.industry}
-                                </span>
-                                <h4 className="text-xl font-extrabold text-brand-primary font-heading pt-1">
-                                  {project.title}
-                                </h4>
-                                <p className="text-xs text-brand-secondary font-medium font-heading">Client: {project.client}</p>
-                              </div>
-                            </div>
-
-                            {/* Problem & Solution block */}
-                            <div className="space-y-4 text-xs md:text-sm text-left">
-                              <div className="space-y-1">
-                                <span className="text-[10px] font-bold uppercase text-red-500 font-heading block">The Problem</span>
-                                <p className="text-brand-text leading-relaxed text-xs">{project.problem}</p>
-                              </div>
-                              <div className="space-y-1">
-                                <span className="text-[10px] font-bold uppercase text-brand-secondary font-heading block">Our Solution</span>
-                                <p className="text-brand-primary leading-relaxed text-xs font-medium">{project.solution}</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Lower Section */}
-                          <div className="bg-white p-6 md:p-8 border-t border-brand-border space-y-4">
-                            <div className="bg-brand-section p-3 rounded-lg border border-brand-border/60 text-xs text-left">
-                              <strong className="text-brand-secondary font-heading block mb-0.5">Proven Business Outcome:</strong>
-                              <span className="text-brand-text leading-relaxed">{project.metrics}</span>
-                            </div>
-
-                            <div className="flex flex-wrap gap-2 pt-2">
-                              {project.stack.map((tech, i) => (
-                                <span key={i} className="text-[10px] font-mono font-bold bg-brand-section border border-brand-border px-2.5 py-1 rounded text-slate-600">
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-
-                            <div className="pt-2 flex justify-between items-center text-xs">
-                              <button
-                                onClick={() => navigate('/contact')}
-                                className="font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer"
-                              >
-                                Enquire about this case <ArrowRight className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
+                    {category.projects.map((project, idx) => (
+                      <CaseStudyCard key={idx} project={project} idx={idx} navigate={navigate} />
+                    ))}
                   </div>
                 </div>
               </div>
             );
           })}
+
+          {/* Business Growth Solutions Section */}
+          <div id="growth" className="scroll-mt-32 space-y-12 border-t border-brand-border/40 pt-16 md:pt-24 text-left">
+            {/* Services Provided Panel */}
+            <div className="bg-brand-section border border-brand-border rounded-2xl p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7 space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-white border border-brand-border rounded-lg flex items-center justify-center text-brand-secondary shadow-xs">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-brand-primary font-heading">
+                    Business Growth Solutions
+                  </h2>
+                </div>
+                <p className="text-sm md:text-base text-brand-text leading-relaxed">
+                  Sustainable business growth requires a structured approach to sales, marketing, and customer acquisition. M2P Nexus works with organizations to develop scalable business development strategies that improve market reach, strengthen customer relationships, and drive measurable commercial success.
+                </p>
+              </div>
+
+              <div className="lg:col-span-5 bg-white border border-brand-border p-5 rounded-xl space-y-3">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-brand-secondary font-heading flex items-center gap-1.5">
+                  <Target className="w-4 h-4 text-brand-accent" />
+                  Services Provided:
+                </h3>
+                <ul className="space-y-2 text-xs text-brand-text">
+                  {[
+                    'End-to-end client acquisition strategies for B2B and B2C organizations.',
+                    'Digital marketing solutions including SEO, social media, branding, paid advertising, and content marketing.',
+                    'Sales pipeline development, CRM optimization, lead nurturing, and conversion strategy.',
+                    'Business consulting covering go-to-market strategy, market research, expansion planning, and partnership development.'
+                  ].map((service, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
+                      <span>{service}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Case Studies Header */}
+            <div className="space-y-2">
+              <span className="text-xs font-semibold text-brand-accent uppercase tracking-widest font-heading">
+                CASE STUDIES
+              </span>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-brand-primary font-heading">
+                Proven Business Growth Success Stories
+              </h3>
+              <p className="text-sm text-brand-text max-w-3xl leading-relaxed">
+                Explore how M2P Nexus has helped businesses strengthen their market presence, generate qualified opportunities, improve customer acquisition, and achieve sustainable business growth through strategic consulting and digital transformation.
+              </p>
+            </div>
+
+            {/* Case Studies Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {growthCaseStudies.map((caseStudy, idx) => (
+                <CaseStudyCard key={idx} project={caseStudy} idx={idx} navigate={navigate} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

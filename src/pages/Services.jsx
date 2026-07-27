@@ -97,33 +97,46 @@ export default function Services() {
       title: 'Workforce Solutions',
       icon: Users,
       illustration: null, // Custom layout for workforce
-      description: 'Finding skilled developers, database managers, and AI architects is challenging. We act as your specialized technical recruitment partner, screening, vetting, and training tech talents specifically prepared to merge with your company.',
+      leftCard: {
+        title: 'Workforce Placement Framework',
+        description: 'We empower organizations to build, manage, and retain exceptional talent through strategic recruitment, HR consulting, workforce planning, and Fractional HR services. Our solutions are designed to strengthen people operations, improve hiring efficiency, and create scalable HR systems that support sustainable business growth.',
+        features: [
+          'Talent Acquisition',
+          'Fractional HR',
+          'HR Operations',
+          'HR Consulting'
+        ]
+      },
+      description: 'Building a high-performing workforce requires more than recruitment. M2P Nexus partners with organizations to establish robust HR frameworks, attract top talent, optimize people operations, and align workforce strategies with business objectives.',
       benefits: [
-        'End-to-end recruitment loops including coding tests and design interviews.',
-        'Custom pre-onboarding bootcamps aligning candidates with your tech stack.',
-        'Contract-to-hire and full-time placement options for agile teams.',
-        'Ongoing technical mentorship and training sessions led by our director.'
+        'End-to-end recruitment for permanent, contract, executive, leadership, technical, and non-technical positions.',
+        'Complete HR department setup, including policies, employee handbooks, documentation, and compliance frameworks.',
+        'Fractional HR leadership supporting workforce planning, organizational design, and performance management.',
+        'HR operations management covering employee lifecycle, payroll coordination, HR audits, engagement, and compliance.'
       ],
       outcomes: [
-        'Reduction in recruitment loops from 45 days to 14 days.',
-        'Higher candidate retention through customized skill alignment.',
-        'Technical staff ready to deploy production code from Day 1.'
+        'Reduced hiring turnaround time with improved candidate quality.',
+        'Scalable HR systems supporting organizational growth.',
+        'Enhanced employee retention and workforce engagement.',
+        'Strong HR governance with compliant and standardized processes.'
       ],
+      packageHeading: 'Available Services',
+      packageDescription: 'Select a service to request customized pricing and consultation from our HR specialists.',
       packages: [
         {
-          name: '1:1 Sourcing Strategy Audit',
-          details: 'Diagnostic session to audit your current tech team hiring loop, define precise candidate profiles, and draft evaluation questions.',
-          deliverable: 'Optimized hiring plan, structured coding interview rubrics, and tailored job description assets.'
+          name: 'Recruitment & Talent Acquisition',
+          details: 'Comprehensive recruitment solutions designed to identify, assess, and hire professionals aligned with your business goals and organizational culture.',
+          deliverable: 'Qualified candidate shortlist, interview coordination, recruitment assessment reports, offer management support, and onboarding assistance.'
         },
         {
-          name: 'Vetted Technical Sourcing',
-          details: 'Complete end-to-end recruitment search. We filter candidates, perform initial technical tests, and provide a shortlist of highly aligned engineers.',
-          deliverable: 'Vetted resume portfolio, screening feedback reports, and coordinated calendar for final loop interviews.'
+          name: 'HR Department Setup & Operations',
+          details: 'A complete HR transformation solution for businesses establishing structured HR processes, documentation, and compliance systems.',
+          deliverable: 'HR policies, employee handbook, HR documentation, compliance framework, HR process implementation, and operational support.'
         },
         {
-          name: 'Custom Team Placement & Training',
-          details: 'A premium service where we hire developers and train them specifically on your tech stack and repository architecture before they start.',
-          deliverable: 'Pre-onboarded candidates, bootcamp completion records, and 30-day technical integration mentorship.'
+          name: 'Fractional HR Partnership',
+          details: 'Strategic HR leadership for growing organizations requiring experienced HR expertise without a full-time HR executive.',
+          deliverable: 'Strategic HR roadmap, workforce planning, performance management framework, HR analytics, and continuous HR advisory.'
         }
       ]
     },
@@ -131,34 +144,47 @@ export default function Services() {
       id: 'growth',
       title: 'Business Growth Solutions',
       icon: TrendingUp,
-      illustration: growthIllustration,
-      description: 'Technology is only as valuable as the growth it drives. We partner with business leaders to build digital footprint maps, optimize lead pipelines, reposition software packages, and execute strategic digital growth plans.',
+      illustration: null,
+      leftCard: {
+        title: 'Business Development Solutions',
+        description: 'We help businesses accelerate growth through strategic business development, client acquisition, digital marketing, and market expansion initiatives. Our solutions are designed to strengthen your brand, generate qualified opportunities, and build scalable revenue pipelines.',
+        features: [
+          'Client Acquisition',
+          'Digital Marketing',
+          'Growth Strategy',
+          'Market Expansion'
+        ]
+      },
+      description: 'Sustainable business growth requires a structured approach to sales, marketing, and customer acquisition. M2P Nexus works with organizations to develop scalable business development strategies that improve market reach, strengthen customer relationships, and drive measurable commercial success.',
       benefits: [
-        'Complete online brand authority analysis and SEO mapping.',
-        'Setup of high-performance marketing channels and CRM tracking systems.',
-        'Software product-market fit audits and SaaS packaging consulting.',
-        'Consulting on entering new regional and global trade corridors.'
+        'End-to-end client acquisition strategies for B2B and B2C organizations.',
+        'Digital marketing solutions including SEO, social media, branding, paid advertising, and content marketing.',
+        'Sales pipeline development, CRM optimization, lead nurturing, and conversion strategy.',
+        'Business consulting covering go-to-market strategy, market research, expansion planning, and partnership development.'
       ],
       outcomes: [
-        'Increased client inquiries through WhatsApp and LinkedIn.',
-        'Clear product packaging resulting in improved conversion rates.',
-        'A comprehensive digital marketing roadmap for the next 12-24 months.'
+        'Increased qualified business enquiries and lead generation.',
+        'Stronger brand visibility and digital presence.',
+        'Higher customer conversion through optimized sales processes.',
+        'Sustainable business growth supported by scalable acquisition strategies.'
       ],
+      packageHeading: 'Available Services',
+      packageDescription: 'Select a service to request customized pricing and consultation from our business growth specialists.',
       packages: [
         {
-          name: '1:1 Growth & SEO Audit',
-          details: 'Diagnostic review of your current customer acquisition channels, digital footprint, conversion funnel bottlenecks, and product messaging.',
-          deliverable: 'Comprehensive conversion audit report, SEO target keyword map, and growth framework checklist.'
+          name: 'Business Development & Client Acquisition',
+          details: 'A strategic consulting service focused on generating qualified opportunities, building sales pipelines, and improving customer acquisition performance.',
+          deliverable: 'Business development roadmap, lead generation strategy, sales pipeline framework, CRM recommendations, and customer acquisition plan.'
         },
         {
-          name: 'CRM & Lead Automation Flow',
-          details: 'Setup and configuration of customer database systems (CRMs) to capture leads from forms, WhatsApp, and email, with automated email nurture campaigns.',
-          deliverable: 'Integrated CRM environment, automated follow-up sequences, and operator configuration guide.'
+          name: 'Digital Marketing & Brand Growth',
+          details: 'A comprehensive marketing solution designed to strengthen your digital presence, improve brand visibility, and generate measurable business growth.',
+          deliverable: 'Digital marketing strategy, SEO recommendations, social media roadmap, content marketing plan, campaign execution framework, and performance reporting.'
         },
         {
-          name: 'Product & Pricing Strategy',
-          details: 'Consultancy focusing on SaaS product packaging, monetization structures, regional branding positioning, and user acquisition pipelines.',
-          deliverable: 'Pricing model schematic, go-to-market playbook, and brand message guidelines.'
+          name: 'Startup Growth & Market Expansion',
+          details: 'A strategic advisory engagement for startups and growing businesses looking to scale operations, enter new markets, and strengthen their competitive positioning.',
+          deliverable: 'Business growth roadmap, market expansion strategy, competitor analysis, go-to-market framework, and business scaling recommendations.'
         }
       ]
     }
@@ -213,36 +239,27 @@ export default function Services() {
                           className="w-full h-auto object-cover rounded-lg"
                         />
                       </div>
-                    ) : (
-                      // Fallback for Workforce Solution (Sleek abstract icon grid)
+                    ) : service.leftCard ? (
                       <div className="w-full max-w-md bg-brand-section border border-brand-border rounded-2xl p-8 text-left space-y-6">
                         <div className="w-12 h-12 bg-white border border-brand-border rounded flex items-center justify-center text-brand-secondary shadow-xs">
-                          <Users className="w-6 h-6" />
+                          <Icon className="w-6 h-6" />
                         </div>
-                        <h4 className="text-lg font-bold text-brand-primary font-heading">Workforce Placement Framework</h4>
+                        <h4 className="text-lg font-bold text-brand-primary font-heading">
+                          {service.leftCard.title}
+                        </h4>
                         <p className="text-sm text-brand-text leading-relaxed">
-                          We screen and train technical talent specifically focused on React, Node.js, .NET, and Python. We match professionals with the culture and codebase of your company.
+                          {service.leftCard.description}
                         </p>
                         <div className="grid grid-cols-2 gap-4 text-xs font-semibold text-brand-primary font-heading border-t border-brand-border pt-4">
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 bg-brand-accent rounded-full"></span>
-                            Full Vetting
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 bg-brand-accent rounded-full"></span>
-                            Pre-Training
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 bg-brand-accent rounded-full"></span>
-                            Contract-to-Hire
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 bg-brand-accent rounded-full"></span>
-                            CTO Mentorship
-                          </div>
+                          {service.leftCard.features.map((feat, i) => (
+                            <div key={i} className="flex items-center gap-1.5">
+                              <span className="w-2 h-2 bg-brand-accent rounded-full"></span>
+                              {feat}
+                            </div>
+                          ))}
                         </div>
                       </div>
-                    )}
+                    ) : null}
                   </div>
 
                   {/* Content block */}
@@ -303,11 +320,11 @@ export default function Services() {
                 <div className="bg-brand-section border border-brand-border/60 rounded-2xl p-6 md:p-8 space-y-6 text-left">
                   <div className="space-y-1">
                     <span className="text-xs font-semibold text-brand-accent uppercase tracking-widest font-heading">Engagement Models</span>
-                    <h3 className="text-xl font-bold text-brand-primary font-heading">Available Packages</h3>
-                    <p className="text-sm text-brand-text">Select a package to request custom pricing details directly from our team.</p>
+                    <h3 className="text-xl font-bold text-brand-primary font-heading">{service.packageHeading || 'Available Packages'}</h3>
+                    <p className="text-sm text-brand-text">{service.packageDescription || 'Select a package to request custom pricing details directly from our team.'}</p>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className={`grid grid-cols-1 ${service.packages.length === 1 ? 'max-w-xl' : 'md:grid-cols-2 lg:grid-cols-3'} gap-6`}>
                     {service.packages.map((pkg, idx) => (
                       <div key={idx} className="bg-white border border-brand-border p-5 rounded-xl flex flex-col justify-between space-y-5 hover:border-brand-secondary/40 shadow-xs hover:shadow-sm transition-all">
                         <div className="space-y-2">
