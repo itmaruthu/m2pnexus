@@ -9,18 +9,6 @@ import growthIllustration from '../assets/growth_illustration.png';
 export default function Services() {
   const navigate = useNavigate();
 
-  // Helper functions to generate pre-filled enquiry links
-  const getWhatsAppLink = (serviceTitle, packageName) => {
-    const text = `Hello Maruthu, I would like to make a price enquiry for the "${packageName}" package under your "${serviceTitle}" service. Please share details and pricing.`;
-    return `https://wa.me/919944283316?text=${encodeURIComponent(text)}`;
-  };
-
-  const getEmailLink = (serviceTitle, packageName) => {
-    const subject = `Price Enquiry: ${serviceTitle} - ${packageName}`;
-    const body = `Hello M2P Nexus Team,\n\nI visited your website and would like to receive a price quote and further details for:\n\nService: ${serviceTitle}\nPackage: ${packageName}\n\nPlease contact me with more information.\n\nThank you.`;
-    return `mailto:hello@m2pnexus.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  };
-
   const servicesList = [
     {
       id: 'technology',
@@ -38,23 +26,6 @@ export default function Services() {
         'Up to 90% reduction in paper-based entry operations.',
         'Real-time inventory and delivery logging across all warehouses.',
         'Secured, role-based system access protecting company data.'
-      ],
-      packages: [
-        {
-          name: '1:1 Architecture Consultation',
-          details: 'Direct diagnostic session with our technology lead to audit your current manual processes, design database schemas, and map out your system design schematic.',
-          deliverable: 'Custom software architecture roadmap, database schema draft, and technology recommendation report.'
-        },
-        {
-          name: 'Enterprise ERP Implementation',
-          details: 'Bespoke ERP system development engineered for your specific operations (steel manufacturing, agricultural trade, or logistics tracking). Includes bilingual capabilities.',
-          deliverable: 'Fully deployed cloud database system, operator training sessions, and 3 months of hypercare support.'
-        },
-        {
-          name: 'Corporate Web Portal',
-          details: 'High-performance website or customer portal designed for maximum search engine authority, speed optimization, and lead generation.',
-          deliverable: 'Responsive React/Next.js corporate website, integrated CRM capture, and basic SEO foundation.'
-        }
       ]
     },
     {
@@ -73,23 +44,6 @@ export default function Services() {
         'Significant time savings on routine weekly office compilation.',
         'Instant generation of complex analytics summaries.',
         'Automated notifications flagging raw material price shifts.'
-      ],
-      packages: [
-        {
-          name: '1:1 AI Feasibility Session',
-          details: 'A focused consultation to analyze your company\'s operational logs, identify friction points ripe for AI automation, and estimate ROI.',
-          deliverable: 'AI automation roadmap, feasibility analysis report, and tech stack options blueprint.'
-        },
-        {
-          name: 'Log & Data Parsing Pipeline',
-          details: 'Automated data pipelines that ingest raw, unstructured documents (emails, receipts, shipping logs) and compile them into structured reports.',
-          deliverable: 'Deployable Python script or cloud function with API hooks, feeding clean data into your systems.'
-        },
-        {
-          name: 'Intelligent AI Agents',
-          details: 'Custom internal or client-facing chatbots trained on your inventory logs, policy guidelines, or product catalogs for instant support.',
-          deliverable: 'Embedded React chat interface, trained LLM agent pipeline, and API orchestration layer.'
-        }
       ]
     },
     {
@@ -119,25 +73,6 @@ export default function Services() {
         'Scalable HR systems supporting organizational growth.',
         'Enhanced employee retention and workforce engagement.',
         'Strong HR governance with compliant and standardized processes.'
-      ],
-      packageHeading: 'Available Services',
-      packageDescription: 'Select a service to request customized pricing and consultation from our HR specialists.',
-      packages: [
-        {
-          name: 'Recruitment & Talent Acquisition',
-          details: 'Comprehensive recruitment solutions designed to identify, assess, and hire professionals aligned with your business goals and organizational culture.',
-          deliverable: 'Qualified candidate shortlist, interview coordination, recruitment assessment reports, offer management support, and onboarding assistance.'
-        },
-        {
-          name: 'HR Department Setup & Operations',
-          details: 'A complete HR transformation solution for businesses establishing structured HR processes, documentation, and compliance systems.',
-          deliverable: 'HR policies, employee handbook, HR documentation, compliance framework, HR process implementation, and operational support.'
-        },
-        {
-          name: 'Fractional HR Partnership',
-          details: 'Strategic HR leadership for growing organizations requiring experienced HR expertise without a full-time HR executive.',
-          deliverable: 'Strategic HR roadmap, workforce planning, performance management framework, HR analytics, and continuous HR advisory.'
-        }
       ]
     },
     {
@@ -167,25 +102,6 @@ export default function Services() {
         'Stronger brand visibility and digital presence.',
         'Higher customer conversion through optimized sales processes.',
         'Sustainable business growth supported by scalable acquisition strategies.'
-      ],
-      packageHeading: 'Available Services',
-      packageDescription: 'Select a service to request customized pricing and consultation from our business growth specialists.',
-      packages: [
-        {
-          name: 'Business Development & Client Acquisition',
-          details: 'A strategic consulting service focused on generating qualified opportunities, building sales pipelines, and improving customer acquisition performance.',
-          deliverable: 'Business development roadmap, lead generation strategy, sales pipeline framework, CRM recommendations, and customer acquisition plan.'
-        },
-        {
-          name: 'Digital Marketing & Brand Growth',
-          details: 'A comprehensive marketing solution designed to strengthen your digital presence, improve brand visibility, and generate measurable business growth.',
-          deliverable: 'Digital marketing strategy, SEO recommendations, social media roadmap, content marketing plan, campaign execution framework, and performance reporting.'
-        },
-        {
-          name: 'Startup Growth & Market Expansion',
-          details: 'A strategic advisory engagement for startups and growing businesses looking to scale operations, enter new markets, and strengthen their competitive positioning.',
-          deliverable: 'Business growth roadmap, market expansion strategy, competitor analysis, go-to-market framework, and business scaling recommendations.'
-        }
       ]
     }
   ];
@@ -221,9 +137,9 @@ export default function Services() {
               <div
                 key={service.id}
                 id={service.id}
-                className="space-y-12 border-b border-brand-border/40 pb-16 md:pb-24 last:border-0 last:pb-0"
+                className="border-b border-brand-border/40 pb-16 md:pb-24 last:border-0 last:pb-0"
               >
-                {/* Upper Part: Overview and Columns */}
+                {/* Overview and Columns */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   {/* Image block */}
                   <div
@@ -313,58 +229,6 @@ export default function Services() {
                         </ul>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Lower Part: Dynamic Packages Grid */}
-                <div className="bg-brand-section border border-brand-border/60 rounded-2xl p-6 md:p-8 space-y-6 text-left">
-                  <div className="space-y-1">
-                    <span className="text-xs font-semibold text-brand-accent uppercase tracking-widest font-heading">Engagement Models</span>
-                    <h3 className="text-xl font-bold text-brand-primary font-heading">{service.packageHeading || 'Available Packages'}</h3>
-                    <p className="text-sm text-brand-text">{service.packageDescription || 'Select a package to request custom pricing details directly from our team.'}</p>
-                  </div>
-                  
-                  <div className={`grid grid-cols-1 ${service.packages.length === 1 ? 'max-w-xl' : 'md:grid-cols-2 lg:grid-cols-3'} gap-6`}>
-                    {service.packages.map((pkg, idx) => (
-                      <div key={idx} className="bg-white border border-brand-border p-5 rounded-xl flex flex-col justify-between space-y-5 hover:border-brand-secondary/40 shadow-xs hover:shadow-sm transition-all">
-                        <div className="space-y-2">
-                          <h4 className="font-extrabold text-brand-primary text-base font-heading leading-snug">
-                            {pkg.name}
-                          </h4>
-                          <p className="text-xs text-brand-text leading-relaxed">
-                            {pkg.details}
-                          </p>
-                          <div className="bg-brand-section p-2.5 rounded border border-brand-border/40 text-[11px] leading-relaxed">
-                            <strong className="text-brand-secondary font-heading block mb-0.5">Key Deliverable:</strong>
-                            <span className="text-brand-text">{pkg.deliverable}</span>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-2 pt-3 border-t border-brand-border/40">
-                          <a
-                            href={getWhatsAppLink(service.title, pkg.name)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-[#25D366] text-white hover:bg-[#20ba59] font-bold text-xs px-3 py-2 rounded-md transition-colors cursor-pointer flex items-center justify-center gap-1.5 w-full shadow-xs text-center"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-3.5 h-3.5 fill-current shrink-0">
-                              <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.7-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-                            </svg>
-                            Price Enquiry (WhatsApp)
-                          </a>
-                          <a
-                            href={getEmailLink(service.title, pkg.name)}
-                            className="border border-brand-border text-brand-primary hover:bg-brand-section font-bold text-xs px-3 py-2 rounded-md transition-colors cursor-pointer flex items-center justify-center gap-1.5 w-full text-center"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 text-brand-accent shrink-0">
-                              <rect width="20" height="16" x="2" y="4" rx="2"/>
-                              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                            </svg>
-                            Price Enquiry (Email)
-                          </a>
-                        </div>
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>
