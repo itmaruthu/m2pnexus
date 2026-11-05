@@ -1,27 +1,31 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
-import MobileCallButton from './MobileCallButton';
+import MobileContactBar from './MobileContactBar';
+import { recordPath } from './previousPath';
 
 export default function Layout({ children }) {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
-  // Automatically scroll back to top of page on route shifts
+  // On route changes, go to the linked section (e.g. /portfolio/#build) or back to the top of the page
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+    recordPath(pathname);
+    const target = hash && document.getElementById(hash.slice(1));
+    if (target) target.scrollIntoView({ behavior: 'instant' });
+    else window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname, hash]);
 
   return (
     <div className="flex flex-col min-h-screen bg-brand-bg text-brand-text font-sans antialiased">
       <Header />
-      <main className="flex-grow">
+      <main id="main" tabIndex={-1} className="flex-grow outline-none">
         {children}
       </main>
       <Footer />
       <FloatingWhatsApp />
-      <MobileCallButton />
+      <MobileContactBar />
     </div>
   );
 }

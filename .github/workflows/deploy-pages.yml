@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [fix/nexus-security-a11y]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # Pages is only set up on the standalone site repo; skip in other copies (e.g. itmaruthu/m2pnexus).
+    if: github.repository == 'itmaruthu/m2p-nexus-claude-version'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - run: npm ci
+      - run: npm run lint
+
+      # Project Pages sites live under /<repo>/, e.g. https://itmaruthu.github.io/m2p-nexus-claude-version/.
+      - run: npm run build
+        env:
+          VITE_BASE: ${{ steps.pages.outputs.base_path }}/
+          VITE_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          # Google Apps Script web app URL for the consultation form (Settings > Variables > Actions)
+          VITE_CONSULT_ENDPOINT: ${{ vars.CONSULT_ENDPOINT }}
+          # Phone numbers are not in the repository (see vite.config.js); the build fails without them.
+          M2P_PHONE_MAIN: ${{ vars.M2P_PHONE_MAIN }}
+          M2P_PHONE_SECOND: ${{ vars.M2P_PHONE_SECOND }}
+          M2P_WHATSAPP: ${{ vars.M2P_WHATSAPP }}
+
+      # Every page is pre-rendered to its own folder (about/index.html, ...) plus 404.html, so GitHub
+      # Pages serves real HTML for each URL. .nojekyll stops Pages from post-processing the files.
+      - run: touch dist/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
