@@ -1,168 +1,186 @@
-import React from 'react';
-import { Phone, Mail, MapPin, ExternalLink, Calendar } from 'lucide-react';
-
-const Linkedin = ({ className }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
+import { Link } from 'react-router-dom';
+import { ArrowRight, Mail, MapPin, Phone, PhoneCall } from 'lucide-react';
 import Seo from '../components/Seo';
+import Breadcrumb from '../components/Breadcrumb';
+import ChatDemo from '../components/ChatDemo';
+import MessageComposer from '../components/MessageComposer';
+import { links, site, telLink } from '../config/site';
+import { nextSteps } from '../config/nextSteps';
+import { LinkedinIcon, WhatsAppIcon } from '../components/icons';
+import { h2Class, sectionPad, whatsappButton } from '../components/styles';
+
+// Contact. Page story: talk to us (hero) -> we write the first message for you -> every way to reach us
+// -> what happens next. Phone numbers are never printed (site rule): calls are labelled buttons.
+
+const NEW_TAB = <span className="sr-only"> (opens in a new tab)</span>;
+
+const card = 'flex flex-col gap-4 rounded-2xl bg-white p-6 ring-1 ring-rule';
+const action =
+  'inline-flex min-h-11 items-center gap-2 self-start rounded-lg px-4 font-semibold transition-colors';
 
 export default function Contact() {
-  const whatsappUrl = "https://wa.me/919944283316?text=Hello%20Maruthu%2C%0A%0AI%20visited%20the%20M2P%20Nexus%20website%20and%20would%20like%20to%20discuss%20my%20business%20requirements.%0A%0APlease%20contact%20me.%0A%0AThank%20you.";
-  const emailUrl = "mailto:hello@m2pnexus.com?subject=Business%20Enquiry%20from%20Website";
-
-  const contactMethods = [
-    {
-      title: 'Phone Numbers',
-      desc: 'Call our technology team directly to discuss ERP, billing software, or staffing requests.',
-      actionText: 'Dial Office Dialer',
-      link: 'tel:+919944283316',
-      icon: Phone,
-      details: (
-        <div className="flex flex-col font-mono text-sm mt-2 text-brand-primary">
-          <span>+91 99442 83316 (Primary)</span>
-          <span className="text-slate-400 font-medium">+91 63804 65605 (Secondary)</span>
-        </div>
-      )
-    },
-    {
-      title: 'Email Client',
-      desc: 'Send us detailed RFPs, requirements documents, or candidate CVs for vetting.',
-      actionText: 'Launch Mail Client',
-      link: emailUrl,
-      icon: Mail,
-      details: (
-        <div className="font-mono text-sm mt-2 text-brand-primary font-medium break-all">
-          hello@m2pnexus.com
-        </div>
-      )
-    },
-    {
-      title: 'LinkedIn Network',
-      desc: 'Connect with our leadership and review past projects, articles, and industry insights.',
-      actionText: 'Visit LinkedIn Profile',
-      link: 'https://linkedin.com',
-      icon: Linkedin,
-      details: (
-        <div className="text-sm mt-2 text-brand-primary font-medium">
-          M2P Nexus Corporate
-        </div>
-      )
-    },
-    {
-      title: 'Office Location',
-      desc: 'Sithalangudi, Madurai, Tamil Nadu, India. Click to open coordinates on Google Maps.',
-      actionText: 'View on Google Maps',
-      link: 'https://maps.google.com/?q=Sithalangudi,Madurai,TamilNadu',
-      icon: MapPin,
-      details: (
-        <div className="text-sm mt-2 text-brand-primary font-medium leading-relaxed">
-          Sithalangudi, Madurai,<br />Tamil Nadu, Pin-625221
-        </div>
-      )
-    }
-  ];
-
   return (
     <>
       <Seo
-        title="Contact Our Office - Phone, Email & Location"
-        description="Get in touch with M2P Nexus. Call +91 99442 83316, email hello@m2pnexus.com, or visit us in Madurai, Tamil Nadu. Direct communication, no forms."
+        title="Contact M2P Nexus: WhatsApp, Phone & Email"
+        description="Talk to M2P Nexus in Madurai on WhatsApp, by phone or by email at hello@m2pnexus.com. You speak directly with our team, in Tamil or English, and we reply within one working day."
       />
 
-      {/* Hero Section */}
-      <section className="bg-brand-primary text-white py-16 md:py-24 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-secondary/30 to-transparent"></div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight font-heading">
-            Contact M2P Nexus
-          </h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Direct, transparent communication channels. Skip the contact forms and speak directly with our engineering office.
-          </p>
+      <section className="relative overflow-hidden border-b border-rule bg-white">
+        <div aria-hidden="true" className="dot-grid pointer-events-none absolute inset-0" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-14 md:pt-10 md:pb-20 space-y-8">
+          <Breadcrumb page="Contact" />
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7 space-y-7">
+              <h1 className="font-display font-bold text-ink text-[2.4rem] sm:text-6xl lg:text-[4.4rem] leading-[1.02] tracking-[-0.03em]">
+                Talk to us like you&rsquo;d talk to a friend who knows tech.
+              </h1>
+              <p className="max-w-xl text-lg leading-relaxed text-body sm:text-xl">
+                Message, call or email. You&rsquo;ll speak directly with our team, in Tamil or English, with no call
+                centre in between. We reply within one working day.
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <a href={links.whatsapp} target="_blank" rel="noopener noreferrer" className={whatsappButton}>
+                  <WhatsAppIcon className="h-5 w-5" />
+                  Chat with us on WhatsApp
+                  {NEW_TAB}
+                </a>
+                <a href="#start" className="inline-flex min-h-11 items-center gap-1.5 px-2 font-semibold text-ink underline decoration-marigold decoration-2 underline-offset-4">
+                  Not sure what to write?
+                </a>
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <ChatDemo />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Info grid */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-semibold text-brand-secondary uppercase tracking-widest font-heading">Connect</span>
-            <h2 className="text-3xl font-extrabold text-brand-primary font-heading">
-              Direct Communication Channels
-            </h2>
-            <p className="text-sm text-brand-text">
-              We value direct relationships. Select any channel below to connect with us immediately.
+      {/* We write the first message */}
+      <section id="start" aria-labelledby="start-title" className="scroll-mt-24 border-b border-rule bg-[#F4F6FA]">
+        <div className={`${sectionPad} space-y-10`}>
+          <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
+            <div className="space-y-3 lg:col-span-7">
+              <p className="font-heading text-sm font-semibold text-leaf">Start the conversation for me</p>
+              <h2 id="start-title" className={h2Class}>
+                Not sure what to write? We&rsquo;ll write it.
+              </h2>
+            </div>
+            <p className="text-lg leading-relaxed text-body lg:col-span-5">
+              Pick a topic and a language. Your first message is ready to send in one tap, in Tamil or English.
             </p>
           </div>
+          <MessageComposer />
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {contactMethods.map((method, idx) => {
-              const Icon = method.icon;
-              return (
-                <a
-                  key={idx}
-                  href={method.link}
-                  target={method.link.startsWith('http') ? '_blank' : '_self'}
-                  rel={method.link.startsWith('http') ? 'noopener noreferrer' : ''}
-                  className="bg-brand-section border border-brand-border hover:border-brand-secondary rounded-xl p-8 hover:shadow-md transition-all flex flex-col justify-between text-left group cursor-pointer"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-white border border-brand-border rounded-lg flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition-colors shadow-xs">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <h3 className="text-lg font-bold text-brand-primary font-heading">{method.title}</h3>
-                    </div>
-                    <p className="text-sm text-brand-text leading-relaxed">{method.desc}</p>
-                    {method.details}
-                  </div>
-
-                  <div className="mt-8 pt-4 border-t border-brand-border flex items-center gap-1.5 text-xs font-bold text-brand-secondary group-hover:text-brand-primary transition-colors">
-                    <span>{method.actionText}</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </div>
+      {/* Every way to reach us */}
+      <section aria-labelledby="reach-title" className="border-b border-rule bg-white">
+        <div className={`${sectionPad} space-y-10`}>
+          <h2 id="reach-title" className={h2Class}>
+            Every way to reach us
+          </h2>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <li className={card}>
+              <WhatsAppIcon className="h-7 w-7 text-leaf" />
+              <div>
+                <h3 className="font-display text-lg font-bold text-ink">WhatsApp</h3>
+                <p className="mt-1 text-body">Message us any time, in Tamil or English.</p>
+              </div>
+              <a href={links.whatsapp} target="_blank" rel="noopener noreferrer" className={`${action} mt-auto bg-leaf text-white hover:bg-[#185730]`}>
+                Chat on WhatsApp
+                {NEW_TAB}
+              </a>
+            </li>
+            <li className={card}>
+              <Phone aria-hidden="true" className="h-7 w-7 text-ink" />
+              <div>
+                <h3 className="font-display text-lg font-bold text-ink">Call</h3>
+                <p className="mt-1 text-body">Talk to our team directly, in Tamil or English.</p>
+              </div>
+              <div className="mt-auto flex flex-wrap gap-2">
+                <a href={telLink(0)} className={`${action} bg-ink text-white hover:bg-[#0E173A]`}>
+                  <Phone aria-hidden="true" className="h-4 w-4" />
+                  Main line
                 </a>
-              );
-            })}
+                <a href={telLink(1)} className={`${action} text-ink ring-1 ring-rule hover:ring-ink`}>
+                  <PhoneCall aria-hidden="true" className="h-4 w-4" />
+                  Second line
+                </a>
+              </div>
+            </li>
+            <li className={card}>
+              <Mail aria-hidden="true" className="h-7 w-7 text-ink" />
+              <div>
+                <h3 className="font-display text-lg font-bold text-ink">Email</h3>
+                <p className="mt-1 break-all text-body">{site.email}</p>
+              </div>
+              <a href={links.email()} className={`${action} mt-auto text-ink ring-1 ring-rule hover:ring-ink`}>
+                Write to us
+              </a>
+            </li>
+            <li className={card}>
+              <MapPin aria-hidden="true" className="h-7 w-7 text-ink" />
+              <div>
+                <h3 className="font-display text-lg font-bold text-ink">Visit</h3>
+                <address className="mt-1 not-italic leading-relaxed text-body">
+                  Sithalangudi, Madurai
+                  <br />
+                  Tamil Nadu 625221, India
+                </address>
+              </div>
+              <a href={site.mapUrl} target="_blank" rel="noopener noreferrer" className={`${action} mt-auto text-ink ring-1 ring-rule hover:ring-ink`}>
+                Get directions
+                {NEW_TAB}
+              </a>
+            </li>
+          </ul>
+
+          <div className="flex flex-col gap-3 rounded-2xl bg-[#F4F6FA] p-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-body">
+              Want to speak with a particular founder, or follow our work?
+            </p>
+            <div className="flex flex-wrap gap-x-5">
+              <Link to="/founder" className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-ink underline decoration-marigold decoration-2 underline-offset-4">
+                Who should you talk to?
+                <ArrowRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-ink underline decoration-marigold decoration-2 underline-offset-4">
+                <LinkedinIcon aria-hidden="true" className="h-4 w-4" />
+                LinkedIn
+                {NEW_TAB}
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* WhatsApp CTA Section */}
-      <section className="bg-brand-section py-16 border-t border-b border-brand-border text-center">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="w-16 h-16 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] rounded-full flex items-center justify-center mx-auto mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-8 h-8 fill-current">
-              <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.7-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
-            </svg>
-          </div>
-          <h3 className="text-2xl font-bold text-brand-primary font-heading">Prefer Immediate WhatsApp Chat?</h3>
-          <p className="text-sm text-brand-text max-w-md mx-auto leading-relaxed">
-            Click below to start an instant text thread with Maruthu Pandi PT. Perfect for quick questions regarding ERP demos or custom pricing.
-          </p>
-          <div className="pt-2">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#25D366] text-white hover:bg-[#20ba59] px-8 py-3.5 rounded-md text-sm font-bold shadow-md hover:shadow-lg transition-all inline-flex items-center gap-2 cursor-pointer"
+      {/* What happens next (shared with the Book page) */}
+      <section aria-labelledby="next-title" className="border-b border-rule bg-[#F4F6FA]">
+        <div className={`${sectionPad} grid gap-10 lg:grid-cols-12 lg:items-center`}>
+          <div className="space-y-4 lg:col-span-4">
+            <h2 id="next-title" className={h2Class}>
+              What happens next
+            </h2>
+            <p className="text-lg leading-relaxed text-body">Your first consultation is always free.</p>
+            <Link
+              to="/book/"
+              className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-ink px-6 font-semibold text-white transition-colors hover:bg-[#0E173A]"
             >
-              Start Instant WhatsApp Chat
-            </a>
+              Book a free consultation
+              <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
           </div>
+          <ol className="grid gap-4 md:grid-cols-3 lg:col-span-8">
+            {nextSteps.en.map((s, i) => (
+              <li key={s.title} className="rounded-2xl bg-white p-6 ring-1 ring-rule">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink font-display text-sm font-bold text-marigold">{i + 1}</span>
+                <p className="mt-4 font-heading text-lg font-semibold text-ink">{s.title}</p>
+                <p className="mt-1 leading-relaxed text-body">{s.text}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </>

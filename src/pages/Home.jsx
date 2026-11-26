@@ -1,756 +1,309 @@
-import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import {
-  Laptop,
-  Brain,
-  Users,
-  TrendingUp,
-  Factory,
-  Building2,
-  Leaf,
-  ShoppingBag,
-  GraduationCap,
-  Truck,
-  Rocket,
-  ShieldCheck,
-  ChevronRight,
-  Phone,
-  Mail,
-  Cpu
-} from 'lucide-react';
-
-const Linkedin = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
-import StatCounter from '../components/StatCounter';
+import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
-import founderPhoto from '../assets/founder_photo.jpg';
+import { links } from '../config/site';
+import { clients } from '../config/clients';
+import { WhatsAppIcon } from '../components/icons';
+import ClosingCta from '../components/ClosingCta';
+import DigitiseSlider from '../components/DigitiseSlider';
+import ScatterToSorted from '../components/ScatterToSorted';
+import BrandFilm from '../components/BrandFilm';
+import StarterOffers from '../components/StarterOffers';
+import { industries as allIndustries } from '../config/industries';
+import { projects as allProjects } from '../config/projects';
+import Promises from '../components/Promises';
+import Faq from '../components/Faq';
+import { CallIcon } from '../components/CallIcon';
+import BookButton from '../components/consultation/BookButton';
+import { h2Class, outlineButton, sectionPad, textLink, whatsappButton } from '../components/styles';
 
-// Framer Motion Animation Variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-};
+// Content follows the M2P Nexus brand guide: problem first, plain language, one partner instead of five
+// vendors, no unverifiable numbers.
 
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
+const vendors = ['A software company', 'An HR agency', 'A marketing agency', 'An AI consultant', 'An IT consultant'];
+
+const serviceGroups = [
+  {
+    title: 'Run your business',
+    items: [
+      { name: 'Software development', desc: 'Billing, inventory, CRM and ERP systems built around how you already work.' },
+      { name: 'Websites', desc: 'Business websites and landing pages that work on every phone, kept up to date.' },
+      { name: 'Mobile apps', desc: 'Android, iOS and cross-platform apps for your customers or your team.' },
+    ],
+  },
+  {
+    title: 'Work smarter',
+    items: [
+      { name: 'AI solutions', desc: 'Chatbots, document reading and workflow automation where they save real time.' },
+      { name: 'Digital transformation', desc: 'Move paper and spreadsheet processes online, step by step.' },
+      { name: 'IT consulting', desc: 'Straight advice on what to build, buy or skip before you spend money.' },
+    ],
+  },
+  {
+    title: 'Grow',
+    items: [
+      { name: 'Digital marketing', desc: 'Social media, SEO and lead generation that bring in enquiries.' },
+      { name: 'HR & talent acquisition', desc: 'Recruitment, hiring strategy and HR consulting to build the right team.' },
+    ],
+  },
+];
+
+
+
+
+const steps = [
+  { title: 'We listen', desc: 'We learn how your business runs today, in your language, before suggesting anything.' },
+  { title: 'We plan', desc: 'You get a clear scope, timeline and quotation before work starts.' },
+  { title: 'We build and train', desc: 'We build in small steps and train your team until they are comfortable.' },
+  { title: 'We stay', desc: 'After launch we support, improve and grow the system with your business.' },
+];
 
 export default function Home() {
-  const navigate = useNavigate();
-  const whatsappUrl = "https://wa.me/919944283316?text=Hello%20Maruthu%2C%0A%0AI%20visited%20the%20M2P%20Nexus%20website%20and%20would%20like%20to%20discuss%20my%20business%20requirements.%0A%0APlease%20contact%20me.%0A%0AThank%20you.";
-  const emailUrl = "mailto:hello@m2pnexus.com?subject=Business%20Enquiry%20from%20Website";
-
-  // Data mapping
-
-  const solutionsWeProvide = [
-    { title: 'Technology Solutions', desc: 'Custom enterprise software, ERP developments, high-traffic billing software, and custom business portals built with modern architectures.', icon: Laptop, link: '/services' },
-    { title: 'AI Solutions', desc: 'Integrate artificial intelligence, automated reporting pipelines, predictive business analytics, and machine learning systems into daily workflows.', icon: Brain, link: '/services' },
-    { title: 'Workforce Solutions', desc: 'Bridge staffing gaps with highly qualified talent, expert technical screening, and corporate onboarding programs for rapid team expansion.', icon: Users, link: '/services' },
-    { title: 'Business Growth Solutions', desc: 'Drive product positioning, digital presence, strategic growth consultancy, and comprehensive tech transformation strategies.', icon: TrendingUp, link: '/services' }
-  ];
-
-  const featuredSolutions = [
-    { title: 'Tamil Billing Software', industry: 'Retail & Agribusiness', problem: 'Local traders struggle with complex English billing tools.', tech: 'React, Node.js, Tailwind CSS', desc: 'Highly intuitive bilingual (Tamil/English) billing system supporting GST compliance, offline functionality, and fast checkout.' },
-    { title: 'Steel Industry ERP', industry: 'Heavy Manufacturing', problem: 'Fragmented inventory trackers lead to raw material discrepancies.', tech: 'React, .NET Core, SQL Server', desc: 'Comprehensive resource planner managing raw materials, scrap calculations, logistics, client accounts, and employee schedules.' },
-    { title: 'Coconut Trader ERP', industry: 'Agribusiness & Trade', problem: 'Manual recording of bulk weight, transport logistics, and farmer pay.', tech: 'React, Node.js, MongoDB', desc: 'Targeted agricultural commerce system optimizing logistics tracking, batch weights, regional pricing engines, and commission charts.' },
-    { title: 'Business Websites', industry: 'Corporate & SMEs', problem: 'Weak digital footprint and low authority online.', tech: 'Next.js, Tailwind CSS', desc: 'Premium, conversion-optimized corporate web systems built for maximum SEO rankings, fast load speeds, and professional branding.' },
-    { title: 'AI Business Automation', industry: 'Enterprise Operations', problem: 'Expensive labor spent on repetitive data compilation and analytics.', tech: 'Python, OpenAI API, LangChain', desc: 'Custom automation agents that analyze operational logs, generate daily summaries, compile invoices, and draft client communications.' }
-  ];
-
-  const industriesWeServe = [
-    { title: 'Manufacturing', icon: Factory, desc: 'Custom ERP systems for steel, textile, and heavy process industries.', tag: 'ERP & Industrial', colSpan: 2, rowSpan: 2, variant: 'hero' },
-    { title: 'Construction', icon: Building2, desc: 'Material logistics, billing, and site delivery management.', colSpan: 1, rowSpan: 1, variant: 'standard' },
-    { title: 'Agriculture', icon: Leaf, desc: 'Farm-to-market trading, weighbridge automation, and crop logistics.', colSpan: 1, rowSpan: 1, variant: 'standard' },
-    { title: 'Startups & SMEs', icon: Rocket, desc: 'Rapid MVPs, digital presence, and cloud-first solutions for growing ventures.', colSpan: 2, rowSpan: 1, variant: 'wide' },
-    { title: 'EdTech', icon: GraduationCap, desc: 'Student portals, GPA automation, and real-time parent notifications.', colSpan: 1, rowSpan: 1, variant: 'standard' },
-    { title: 'Logistics', icon: Truck, desc: 'Fleet management, route tracking, driver logs, and fuel auditing.', colSpan: 1, rowSpan: 1, variant: 'standard' },
-    { title: 'Retail', icon: ShoppingBag, desc: 'Bilingual POS systems and offline-first GST billing solutions.', colSpan: 2, rowSpan: 1, variant: 'wide' },
-    { title: 'IT & Technology', icon: Cpu, desc: 'Tech staffing, offshore delivery teams, and strategic digital consulting.', tag: 'Digital Transformation', colSpan: 4, rowSpan: 1, variant: 'banner' },
-  ];
-
   return (
     <>
       <Seo
-        title="Digital Solutions & AI Consulting"
-        description="Empowering enterprises, SMEs, and traders through custom software, Steel & Coconut ERPs, AI-driven automation, and workforce solutions. Modernizing tradition from root to success."
+        title="Software, AI, Hiring & Marketing for Growing Businesses"
+        description="M2P Nexus, Madurai: one partner for software, websites, AI, HR and digital marketing, helping shops, traders and manufacturers move from paper and Excel to systems that save time."
+        alternates={[
+          { hreflang: 'en', path: '/' },
+          { hreflang: 'ta', path: '/ta/' },
+          { hreflang: 'x-default', path: '/' },
+        ]}
       />
 
-      {/* SECTION 1: Hero */}
-      <section className="relative overflow-hidden bg-white border-b border-brand-border py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left: Content */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeInUp}
-              className="lg:col-span-7 space-y-6 text-left"
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-section border border-brand-border rounded-full text-brand-secondary text-xs font-semibold uppercase tracking-wider font-heading">
-                <span>M2P Nexus</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
-                <span>Corporate Technology Partner</span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-primary leading-tight font-heading">
-                Digital Solutions That Help Businesses Grow
-              </h1>
-              <div className="space-y-2 border-l-4 border-brand-accent pl-4 py-1">
-                <p className="text-xl font-bold text-brand-secondary font-heading">
-                  Modernizing Tradition. Empowering Communities. Driving Innovation.
-                </p>
-                <p className="text-lg font-bold text-brand-accent tracking-widest uppercase font-heading">
-                  வேரிலிருந்து வெற்றிவரை
-                </p>
-              </div>
-              <p className="text-lg text-brand-text max-w-xl leading-relaxed">
-                Bridging the gap between traditional businesses and modern technology through AI-powered solutions, workforce excellence, and digital transformation. We help you scale from the root up.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <button
-                  onClick={() => navigate('/contact')}
-                  className="bg-brand-secondary text-white hover:bg-brand-primary font-bold px-8 py-3.5 rounded-md shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  Request Consultation
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border border-emerald-500/40 text-emerald-600 hover:bg-emerald-500/10 font-bold px-8 py-3.5 rounded-md transition-all text-center flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-5 h-5 fill-current">
-                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.7-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
-                  </svg>
-                  WhatsApp Us
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Right: Founder Photo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="lg:col-span-5 flex justify-center relative"
-            >
-              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] rounded-2xl overflow-hidden border-4 border-white shadow-2xl bg-brand-section group">
-                <img
-                  src={founderPhoto}
-                  alt="Maruthu Pandi PT - Founder & Director of M2P Nexus"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="eager"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/60 via-transparent to-transparent"></div>
-                <div className="absolute bottom-6 left-6 text-white text-left">
-                  <p className="text-lg font-bold font-heading">Maruthu Pandi PT</p>
-                  <p className="text-xs text-brand-accent font-semibold tracking-wider font-heading">Founder & Director</p>
-                </div>
-              </div>
-              <div className="absolute -top-4 -left-4 w-12 h-12 bg-brand-accent rounded-lg -z-10 opacity-30 blur-xs"></div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-secondary rounded-lg -z-10 opacity-10 blur-xs"></div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2: Trust Bar */}
-      <section className="py-12 bg-brand-section border-b border-brand-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <StatCounter target={50} suffix="+" label="Projects Delivered" />
-            <StatCounter target={9} suffix="+" label="Industries Served" />
-            <StatCounter target={5} suffix="+" label="ERP Systems Built" />
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3: Solutions We Provide */}
-      <section className="py-16 md:py-24 bg-white border-b border-brand-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
-          <div className="space-y-4 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-brand-primary font-heading">
-              Solutions We Provide
-            </h2>
-            <p className="text-lg text-brand-text">
-              Our core capabilities cover the full technological spectrum needed to scale and manage modern companies.
+      {/* Hero: the customer's problem in words, beside the paper bill it describes. */}
+      <section className="bg-white border-b border-rule overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 md:pt-16 md:pb-24 grid gap-14 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-7 space-y-7">
+            <h1 className="font-display font-bold text-ink text-[2.1rem] sm:text-5xl lg:text-[3.6rem] leading-[1.04] tracking-[-0.025em]">
+              Still running your business on paper bills and WhatsApp orders?
+            </h1>
+            <p className="text-lg sm:text-xl text-body leading-relaxed max-w-[34rem]">
+              M2P Nexus is one partner for your software, AI, hiring and marketing. We help shops, traders and manufacturers move to systems that save time, with a team in Madurai you can call when you need help.
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            {solutionsWeProvide.map((sol, idx) => {
-              const Icon = sol.icon;
-              return (
-                <div
-                  key={idx}
-                  className="bg-brand-section border border-brand-border p-8 rounded-lg hover:border-brand-accent/50 transition-colors flex flex-col justify-between"
-                >
-                  <div className="space-y-4">
-                    <div className="w-14 h-14 bg-white border border-brand-border rounded-lg flex items-center justify-center text-brand-secondary shadow-xs">
-                      <Icon className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-xl font-bold text-brand-primary font-heading">{sol.title}</h3>
-                    <p className="text-base text-brand-text leading-relaxed">{sol.desc}</p>
-                  </div>
-                  <button
-                    onClick={() => navigate(sol.link)}
-                    className="mt-6 text-sm font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1 cursor-pointer w-fit"
-                  >
-                    Learn more details <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: Featured Solutions */}
-      <section className="py-16 md:py-24 bg-brand-section border-b border-brand-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
-          <div className="space-y-4 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-brand-primary font-heading">
-              Featured Solutions
-            </h2>
-            <p className="text-lg text-brand-text">
-              Highly specialized systems engineered by M2P Nexus to solve specific regional and industrial operational problems.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 text-left">
-            {featuredSolutions.map((sol, idx) => (
-              <div
-                key={idx}
-                className="bg-white border border-brand-border p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href={links.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={whatsappButton}
               >
-                <div className="space-y-4">
-                  <div className="flex justify-between items-start">
-                    <span className="text-xs font-semibold text-brand-accent bg-brand-accent/10 px-2.5 py-1 rounded-full font-heading">
-                      {sol.industry}
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-400">
-                      SYS-{idx + 101}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-brand-primary font-heading">{sol.title}</h3>
-                  <div className="space-y-2 text-sm leading-relaxed">
-                    <p className="text-brand-text"><strong className="text-brand-primary">Blocker:</strong> {sol.problem}</p>
-                    <p className="text-brand-text">{sol.desc}</p>
-                  </div>
-                </div>
-                <div className="mt-6 pt-4 border-t border-brand-border">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="font-mono text-slate-500 font-medium">{sol.tech}</span>
-                    <Link to="/portfolio" className="text-brand-secondary font-bold hover:underline flex items-center gap-0.5">
-                      Case details
-                    </Link>
-                  </div>
-                </div>
+                <WhatsAppIcon className="w-5 h-5" />
+                Chat with us on WhatsApp
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+              <BookButton className={outlineButton} />
+            </div>
+            <p className="flex items-center gap-3 text-body">
+              Or call us
+              <CallIcon />
+            </p>
+          </div>
+
+          {/* Signature: drag the handle and the handwritten bill becomes a digital invoice */}
+          <div className="lg:col-span-5">
+            <DigitiseSlider />
+          </div>
+        </div>
+      </section>
+
+      {clients.length > 0 && (
+        <section aria-labelledby="clients-heading" className="bg-white border-b border-rule">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+            <h2 id="clients-heading" className="text-center text-body font-medium">Businesses we work with</h2>
+            <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-6 sm:gap-x-12">
+              {clients.map((c) => (
+                <li key={c.name} className="font-heading font-bold text-lg text-body">
+                  {c.logo ? (
+                    <img
+                      src={c.logo}
+                      alt={c.name}
+                      width={c.width}
+                      height={c.height}
+                      loading="lazy"
+                      className={`${c.large ? 'h-20 sm:h-28' : c.wide ? 'h-10 sm:h-14' : c.medium ? 'h-12 sm:h-[4.5rem]' : 'h-16 sm:h-24'} w-auto opacity-90 transition-opacity hover:opacity-100`}
+                    />
+                  ) : (
+                    c.name
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* One partner instead of five vendors */}
+      <section className="bg-[#F4F6FA] border-b border-rule">
+        <div className={`${sectionPad} grid gap-12 lg:grid-cols-12 lg:items-center`}>
+          <div className="lg:col-span-5 space-y-5">
+            <h2 className={h2Class}>One partner instead of five vendors</h2>
+            <p className="text-lg text-body leading-relaxed max-w-md">
+              Big companies hire a separate firm for each job. Most growing businesses can&rsquo;t, and juggling them costs time anyway. With us there is one team, one point of contact and fewer handovers, delays and surprises.
+            </p>
+          </div>
+          <div className="lg:col-span-7">
+            <ul className="space-y-2 font-heading text-2xl sm:text-3xl text-body/70">
+              {vendors.map((v) => (
+                <li key={v} className="line-through decoration-marigold decoration-[3px]">
+                  <span className="sr-only">Instead of </span>
+                  {v}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 border-t-2 border-ink pt-5 font-display font-bold text-ink text-3xl sm:text-4xl">M2P Nexus</p>
+            <p className="mt-2 text-lg text-body">One team that knows your whole business.</p>
+          </div>
+        </div>
+      </section>
+
+      <BrandFilm
+        title="Seventeen seconds on what changes when you work with us."
+        text="From paper bills and five separate vendors to one connected business, with roots in Madurai."
+      />
+
+      {/* Signature scroll scene: scattered paper slips become one connected system */}
+      <ScatterToSorted />
+
+      {/* Services grouped by what the owner needs */}
+      <section className="bg-white border-b border-rule">
+        <div className={`${sectionPad} space-y-12`}>
+          <div className="max-w-2xl space-y-4">
+            <h2 className={h2Class}>What we can do for your business</h2>
+            <p className="text-lg text-body leading-relaxed">
+              Start with the one thing that hurts most today. Add the rest when you&rsquo;re ready.
+            </p>
+          </div>
+          <div className="grid gap-12 md:grid-cols-3 md:gap-10">
+            {serviceGroups.map((g) => (
+              <div key={g.title} className="border-t-2 border-ink pt-5">
+                <h3 className="font-display font-bold text-leaf text-xl">{g.title}</h3>
+                <ul className="mt-6 space-y-6">
+                  {g.items.map((item) => (
+                    <li key={item.name}>
+                      <p className="font-heading font-semibold text-ink text-lg">{item.name}</p>
+                      <p className="mt-1 text-body leading-relaxed">{item.desc}</p>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
+          <Link to="/services" className={`inline-block ${textLink}`}>
+            See all services
+          </Link>
         </div>
       </section>
 
-      {/* SECTION 5: Industries We Serve — Bento Grid 2.0 */}
-      <section className="py-24 md:py-32 bg-[#FAFAFC] border-b border-brand-border relative overflow-hidden">
-        {/* Subtle radial grid pattern */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.4]" style={{
-          backgroundImage: 'radial-gradient(#CBD5E1 1px, transparent 1px)',
-          backgroundSize: '20px 20px'
-        }} />
-        {/* Ambient glows */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-50/35 rounded-full blur-3xl pointer-events-none" />
+      {/* Start small: fixed-scope starter packs, each opening the booking form pre-filled */}
+      <StarterOffers
+        title="Start small. See the difference first."
+        intro="Not ready for a big project? Pick a fixed-scope starter. It’s the quickest way to see how we work, with a clear quotation before anything begins."
+      />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
-
-          {/* Header */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-          >
-            <div className="space-y-4 max-w-2xl">
-              <motion.span
-                variants={fadeInUp}
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-secondary/8 border border-brand-secondary/15 text-brand-secondary text-xs font-bold uppercase tracking-widest font-heading"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
-                Market Verticals
-              </motion.span>
-              <motion.h2
-                variants={fadeInUp}
-                className="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tight font-heading leading-tight"
-              >
-                Industries We Serve
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="text-base text-brand-text leading-relaxed">
-                Deep engineering expertise and business-first technology across the sectors that drive the real economy.
-              </motion.p>
-            </div>
-            <motion.div variants={fadeInUp}>
-              <button
-                onClick={() => navigate('/industries')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-brand-secondary/30 text-brand-secondary hover:bg-brand-secondary hover:text-white text-sm font-bold transition-all duration-300 cursor-pointer whitespace-nowrap"
-              >
-                All case studies <ChevronRight className="w-4 h-4" />
-              </button>
-            </motion.div>
-          </motion.div>
-
-          {/* Bento 2.0 Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-3 gap-6">
-
-            {/* HERO: Manufacturing — 2 cols × 2 rows */}
-            <motion.button
-              variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              onClick={() => navigate('/industries')}
-              className="group relative text-left cursor-pointer rounded-3xl overflow-hidden sm:col-span-2 lg:col-span-2 lg:row-span-2 min-h-[380px] lg:min-h-[460px] bg-gradient-to-br from-slate-950 via-[#0B1528] to-[#122A52] border border-slate-900 shadow-md hover:shadow-2xl hover:shadow-blue-950/20 transition-all duration-500 flex flex-col justify-between p-8"
+      {/* Explore: the Industries and Portfolio pages tell these stories in full, so Home only points there */}
+      <section aria-labelledby="explore-title" className="border-b border-rule bg-white">
+        <div className={`${sectionPad} space-y-10`}>
+          <h2 id="explore-title" className={`${h2Class} max-w-2xl`}>
+            See how it works for businesses like yours
+          </h2>
+          <div className="grid gap-5 md:grid-cols-2">
+            <Link
+              to="/industries"
+              className="group flex flex-col justify-between gap-6 rounded-3xl bg-[#F4F6FA] p-6 ring-1 ring-rule transition-transform duration-200 hover:-translate-y-1 sm:p-9"
             >
-              {/* Dot pattern overlay */}
-              <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '24px 24px'}} />
-              {/* Glow orb */}
-              <div className="absolute bottom-0 right-0 w-56 h-56 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute top-0 left-0 w-32 h-32 bg-white/5 rounded-full blur-2xl pointer-events-none" />
-              
-              {/* Content Top */}
-              <div className="relative z-10 space-y-4">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover:bg-white/20 transition-all duration-300">
-                  <Factory className="w-7 h-7" />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-extrabold text-white font-heading leading-tight">Manufacturing</h3>
-                  <p className="text-sm text-blue-200/80 leading-relaxed max-w-xs">Custom ERP systems for steel, textile, and heavy process industries.</p>
-                </div>
-              </div>
-
-              {/* Interactive Mini-UI: Live ERP Panel */}
-              <div className="relative z-10 mt-6 bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 flex-1 flex flex-col justify-between font-mono text-[11px] text-slate-400 min-h-[160px]">
-                <div className="flex justify-between items-center border-b border-slate-800 pb-2 mb-2">
-                  <span className="text-white font-semibold flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    STEEL ERP SYSTEM
-                  </span>
-                  <span className="text-slate-500 text-[10px]">v4.2</span>
-                </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="bg-slate-950/80 p-2 rounded-lg border border-slate-800/60 text-center">
-                    <div className="text-[8px] text-slate-500 uppercase">Input Scrap</div>
-                    <div className="text-xs font-bold text-white mt-0.5">14.8 T</div>
-                    <div className="text-[8px] text-emerald-500 font-semibold mt-0.5">↑ 99.2%</div>
-                  </div>
-                  <div className="bg-slate-950/80 p-2 rounded-lg border border-slate-800/60 text-center">
-                    <div className="text-[8px] text-slate-500 uppercase">Furnace Temp</div>
-                    <div className="text-xs font-bold text-white mt-0.5">1,620°C</div>
-                    <div className="text-[8px] text-emerald-500 font-semibold mt-0.5">OPTIMAL</div>
-                  </div>
-                  <div className="bg-slate-950/80 p-2 rounded-lg border border-slate-800/60 text-center">
-                    <div className="text-[8px] text-slate-500 uppercase">Production</div>
-                    <div className="text-xs font-bold text-white mt-0.5">12.4 T</div>
-                    <div className="text-[8px] text-blue-400 font-semibold mt-0.5">Live-Sync</div>
-                  </div>
-                </div>
-                <div className="mt-3 space-y-1.5">
-                  <div className="flex items-center justify-between text-[9px] bg-slate-950/40 px-2 py-1 rounded border border-slate-800/40">
-                    <span>Logistics Gate 1: Outgoing</span>
-                    <span className="text-emerald-500 font-bold">DISPATCHED</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[9px] bg-slate-950/40 px-2 py-1 rounded border border-slate-800/40">
-                    <span>Weighbridge Sync Status</span>
-                    <span className="text-emerald-500 font-bold">CONNECTED</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Action */}
-              <div className="relative z-10 mt-6 flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-300/70 font-heading">ERP &amp; Industrial Systems</span>
-                <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover:bg-white/20 transition-all">
-                  <ChevronRight className="w-4 h-4" />
-                </div>
-              </div>
-            </motion.button>
-
-            {/* Construction — 1×1 */}
-            <motion.button
-              variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              onClick={() => navigate('/industries')}
-              className="group relative text-left cursor-pointer rounded-3xl bg-white border border-slate-200/80 shadow-sm p-6 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden min-h-[220px]"
-            >
-              <div className="space-y-4">
-                <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white group-hover:border-brand-secondary transition-all duration-300">
-                  <Building2 className="w-5 h-5" />
-                </div>
-                <div className="space-y-1.5">
-                  <h3 className="text-base font-bold text-brand-primary font-heading group-hover:text-brand-secondary transition-colors">Construction</h3>
-                  <p className="text-xs text-brand-text leading-relaxed">Material logistics, billing, and site delivery management.</p>
-                </div>
-              </div>
-
-              {/* Interactive Mini-UI: Logistics tracking */}
-              <div className="mt-4 space-y-2">
-                <div className="flex items-center justify-between p-2 bg-slate-50 border border-slate-100 rounded-xl text-[10px]">
-                  <span className="font-semibold text-slate-700">Cement Batch #4</span>
-                  <span className="px-2 py-0.5 bg-blue-100 text-blue-700 font-bold text-[8px] rounded-full uppercase">On-Site</span>
-                </div>
-                <div className="flex items-center justify-between p-2 bg-slate-50 border border-slate-100 rounded-xl text-[10px]">
-                  <span className="font-semibold text-slate-700">Steel Delivery</span>
-                  <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 font-bold text-[8px] rounded-full uppercase">Signed</span>
-                </div>
-              </div>
-
-              <div className="mt-4 flex justify-between items-center text-slate-400 group-hover:text-brand-secondary">
-                <span className="text-[9px] font-bold uppercase tracking-wider">Site Sync</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all duration-200" />
-              </div>
-            </motion.button>
-
-            {/* Agriculture — 1×1 */}
-            <motion.button
-              variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              onClick={() => navigate('/industries')}
-              className="group relative text-left cursor-pointer rounded-3xl bg-white border border-slate-200/80 shadow-sm p-6 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden min-h-[220px]"
-            >
-              <div className="space-y-4">
-                <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white group-hover:border-brand-secondary transition-all duration-300">
-                  <Leaf className="w-5 h-5" />
-                </div>
-                <div className="space-y-1.5">
-                  <h3 className="text-base font-bold text-brand-primary font-heading group-hover:text-brand-secondary transition-colors">Agriculture</h3>
-                  <p className="text-xs text-brand-text leading-relaxed">Farm-to-market trading, weighbridge automation, and crop logistics.</p>
-                </div>
-              </div>
-
-              {/* Interactive Mini-UI: Weighbridge ticket info */}
-              <div className="mt-4 space-y-2 font-mono">
-                <div className="bg-slate-50 border border-slate-100 p-2.5 rounded-xl text-left">
-                  <div className="text-[8px] text-slate-400 uppercase">Weighbridge Log</div>
-                  <div className="text-[10px] font-bold text-slate-800 mt-0.5">NET WT: 14,240 KG</div>
-                  <div className="flex justify-between items-center text-[8px] text-slate-500 mt-1">
-                    <span>Grade: Coir A</span>
-                    <span className="text-emerald-600 font-bold">Verified ✓</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 flex justify-between items-center text-slate-400 group-hover:text-brand-secondary">
-                <span className="text-[9px] font-bold uppercase tracking-wider">Trading Platform</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all duration-200" />
-              </div>
-            </motion.button>
-
-            {/* Startups & SMEs — 2×1 wide */}
-            <motion.button
-              variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              onClick={() => navigate('/industries')}
-              className="group relative text-left cursor-pointer rounded-3xl bg-white border border-slate-200/80 shadow-sm p-6 sm:col-span-2 lg:col-span-2 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden min-h-[220px]"
-            >
-              <div className="flex flex-col sm:flex-row gap-6 items-start justify-between flex-1">
-                <div className="space-y-4 max-w-sm">
-                  <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white group-hover:border-brand-secondary transition-all duration-300">
-                    <Rocket className="w-5 h-5" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <h3 className="text-lg font-bold text-brand-primary font-heading group-hover:text-brand-secondary transition-colors">Startups &amp; SMEs</h3>
-                    <p className="text-xs text-brand-text leading-relaxed">Rapid MVPs, digital presence, and cloud-first solutions for growing ventures.</p>
-                  </div>
-                </div>
-
-                {/* Interactive Mini-UI: Simulated code terminal */}
-                <div className="bg-slate-950 rounded-xl p-3 flex-1 font-mono text-[9px] text-slate-400 border border-slate-800 w-full sm:max-w-[240px] shrink-0 self-center">
-                  <div className="flex items-center gap-1.5 mb-1.5 border-b border-slate-800 pb-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-[8px] text-slate-500 ml-1">deploy.sh</span>
-                  </div>
-                  <div className="space-y-0.5">
-                    <div className="text-slate-500">$ npx create-next-app@latest</div>
-                    <div className="text-blue-400">✓ Project initialized.</div>
-                    <div className="text-emerald-400 font-semibold">✓ Deploy live at m2pnexus.com</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 flex justify-between items-center text-slate-400 group-hover:text-brand-secondary">
-                <span className="text-[9px] font-bold uppercase tracking-wider">MVP Deployment</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all duration-200" />
-              </div>
-            </motion.button>
-
-            {/* EdTech — 1×1 */}
-            <motion.button
-              variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              onClick={() => navigate('/industries')}
-              className="group relative text-left cursor-pointer rounded-3xl bg-white border border-slate-200/80 shadow-sm p-6 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden min-h-[220px]"
-            >
-              <div className="space-y-4">
-                <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white group-hover:border-brand-secondary transition-all duration-300">
-                  <GraduationCap className="w-5 h-5" />
-                </div>
-                <div className="space-y-1.5">
-                  <h3 className="text-base font-bold text-brand-primary font-heading group-hover:text-brand-secondary transition-colors">EdTech</h3>
-                  <p className="text-xs text-brand-text leading-relaxed">Student portals, GPA automation, and real-time parent notifications.</p>
-                </div>
-              </div>
-
-              {/* Interactive Mini-UI: Student profile snippet */}
-              <div className="mt-4 space-y-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-bold text-[9px] text-brand-secondary border border-slate-200">
-                    MP
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-bold text-slate-800">Maruthu P.</div>
-                    <div className="text-[8px] text-slate-400">ID #4829</div>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center text-[9px] bg-slate-50 border border-slate-100 p-1 rounded-lg">
-                  <span className="text-slate-600">Attendance</span>
-                  <span className="font-bold text-emerald-600">98.5% (A+)</span>
-                </div>
-              </div>
-
-              <div className="mt-4 flex justify-between items-center text-slate-400 group-hover:text-brand-secondary">
-                <span className="text-[9px] font-bold uppercase tracking-wider">Institution Portal</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all duration-200" />
-              </div>
-            </motion.button>
-
-            {/* Logistics — 1×1 */}
-            <motion.button
-              variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              onClick={() => navigate('/industries')}
-              className="group relative text-left cursor-pointer rounded-3xl bg-white border border-slate-200/80 shadow-sm p-6 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden min-h-[220px]"
-            >
-              <div className="space-y-4">
-                <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white group-hover:border-brand-secondary transition-all duration-300">
-                  <Truck className="w-5 h-5" />
-                </div>
-                <div className="space-y-1.5">
-                  <h3 className="text-base font-bold text-brand-primary font-heading group-hover:text-brand-secondary transition-colors">Logistics</h3>
-                  <p className="text-xs text-brand-text leading-relaxed">Fleet management, route tracking, driver logs, and fuel auditing.</p>
-                </div>
-              </div>
-
-              {/* Interactive Mini-UI: Live route schematic */}
-              <div className="mt-4 bg-slate-50 border border-slate-100 rounded-xl p-2 flex flex-col justify-center items-center relative overflow-hidden min-h-[50px]">
-                <svg className="w-full h-6 text-slate-300" viewBox="0 0 100 20" fill="none">
-                  <path d="M10,10 C30,3 50,17 90,10" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
-                  <circle cx="10" cy="10" r="2.5" fill="#1E3A8A" />
-                  <circle cx="90" cy="10" r="2.5" fill="#10B981" />
-                  <circle cx="50" cy="10" r="3" fill="#10B981" className="animate-ping" />
-                  <circle cx="50" cy="10" r="2.5" fill="#10B981" />
-                </svg>
-                <div className="flex justify-between w-full text-[8px] text-slate-400 px-1 mt-0.5">
-                  <span>Start</span>
-                  <span className="text-brand-secondary font-bold">Transit</span>
-                  <span>End</span>
-                </div>
-              </div>
-
-              <div className="mt-4 flex justify-between items-center text-slate-400 group-hover:text-brand-secondary">
-                <span className="text-[9px] font-bold uppercase tracking-wider">Fleet Tracking</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all duration-200" />
-              </div>
-            </motion.button>
-
-            {/* Retail — 2×1 wide */}
-            <motion.button
-              variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              onClick={() => navigate('/industries')}
-              className="group relative text-left cursor-pointer rounded-3xl bg-white border border-slate-200/80 shadow-sm p-6 sm:col-span-2 lg:col-span-2 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden min-h-[220px]"
-            >
-              <div className="flex flex-col sm:flex-row gap-6 items-start justify-between flex-1">
-                <div className="space-y-4 max-w-sm">
-                  <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white group-hover:border-brand-secondary transition-all duration-300">
-                    <ShoppingBag className="w-5 h-5" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <h3 className="text-lg font-bold text-brand-primary font-heading group-hover:text-brand-secondary transition-colors">Retail</h3>
-                    <p className="text-xs text-brand-text leading-relaxed">Bilingual POS systems and offline-first GST billing solutions.</p>
-                  </div>
-                </div>
-
-                {/* Interactive Mini-UI: GST invoice mockup */}
-                <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 flex-1 flex flex-col justify-between font-mono text-[9px] text-slate-600 w-full sm:max-w-[240px] shrink-0 self-center">
-                  <div className="flex justify-between border-b border-dashed border-slate-200 pb-1 mb-1">
-                    <span className="font-bold text-slate-800 text-[8px]">விற்பனை சீட்டு / GST</span>
-                    <span className="text-slate-400">#8842</span>
-                  </div>
-                  <div className="space-y-0.5">
-                    <div className="flex justify-between">
-                      <span>Rods / கம்பி</span>
-                      <span className="font-semibold">₹14,500</span>
-                    </div>
-                    <div className="flex justify-between text-[8px] text-slate-400">
-                      <span>GST @ 18%</span>
-                      <span>₹2,610</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center border-t border-dashed border-slate-200 pt-1 mt-1 text-[10px] font-bold text-brand-secondary">
-                    <span>மொத்தம் / TOTAL</span>
-                    <span>₹17,110</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 flex justify-between items-center text-slate-400 group-hover:text-brand-secondary">
-                <span className="text-[9px] font-bold uppercase tracking-wider">POS Systems</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all duration-200" />
-              </div>
-            </motion.button>
-
-            {/* IT & Technology — Full-width banner */}
-            <motion.button
-              variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              onClick={() => navigate('/industries')}
-              className="group relative text-left cursor-pointer rounded-3xl bg-white border border-slate-200/80 shadow-sm p-6 sm:p-8 sm:col-span-2 lg:col-span-4 flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-            >
-              {/* Left Content */}
-              <div className="flex-1 max-w-lg space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-secondary to-blue-900 flex items-center justify-center text-white shadow-lg shadow-blue-950/10">
-                    <Cpu className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-extrabold text-brand-primary font-heading group-hover:text-brand-secondary transition-colors">IT &amp; Technology</h3>
-                    <span className="inline-flex px-2 py-0.5 rounded-full bg-brand-secondary/8 border border-brand-secondary/15 text-brand-secondary text-[9px] font-bold uppercase tracking-widest font-heading mt-0.5">Enterprise Delivery</span>
-                  </div>
-                </div>
-                <p className="text-xs text-brand-text leading-relaxed">
-                  Tech staffing, offshore delivery teams, custom API integrations, and strategic digital consulting built for enterprise scalability and transformation.
+              <div className="space-y-3">
+                <p className="font-display text-4xl font-bold sm:text-5xl text-leaf tabular-nums">{allIndustries.length}</p>
+                <h3 className="font-display text-xl font-bold sm:text-2xl text-ink">Industries we work in</h3>
+                <p className="max-w-md leading-relaxed text-body">
+                  {allIndustries.slice(0, 5).map((x) => x.name.toLowerCase()).join(', ')} and {allIndustries.length - 5} more: what runs
+                  on paper today, and what changes.
                 </p>
               </div>
-
-              {/* Right Mini-UI Layout */}
-              <div className="flex-1 flex flex-col md:flex-row gap-4 items-center w-full lg:w-auto">
-                {/* Tech badges */}
-                <div className="flex flex-wrap gap-1.5 justify-center md:justify-start">
-                  {['React', 'Node.js', 'Python', '.NET Core', 'AWS', 'Docker'].map((tech) => (
-                    <span key={tech} className="px-2.5 py-1 bg-slate-50 border border-slate-200/80 rounded-lg text-[9px] font-bold text-slate-600 font-mono shadow-2xs hover:bg-slate-100 hover:text-slate-800 transition-colors">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                {/* Mock endpoint */}
-                <div className="bg-slate-950 text-[9px] font-mono text-slate-400 p-3 rounded-xl border border-slate-800 w-full md:w-52 shrink-0 text-left">
-                  <div className="text-emerald-500 font-semibold flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                    GET /v2/scale/ready
-                  </div>
-                  <div className="text-slate-500 mt-1">{"{"}</div>
-                  <div className="pl-3">"status": "synchronized",</div>
-                  <div className="pl-3">"latency": "14ms"</div>
-                  <div>{"}"}</div>
-                </div>
+              <span className="font-semibold text-ink underline decoration-marigold decoration-2 underline-offset-4 group-hover:decoration-ink">
+                Explore industries
+              </span>
+            </Link>
+            <Link
+              to="/portfolio"
+              className="group relative flex flex-col justify-between gap-6 overflow-hidden rounded-3xl bg-ink p-6 text-white transition-transform duration-200 hover:-translate-y-1 sm:p-9 grain"
+            >
+              <div className="relative z-10 space-y-3">
+                <p className="font-display text-4xl font-bold sm:text-5xl text-marigold tabular-nums">{allProjects.length}</p>
+                <h3 className="font-display text-xl font-bold sm:text-2xl">Systems we&rsquo;ve built</h3>
+                <p className="max-w-md leading-relaxed text-slate-300">
+                  Billing and stock, supply chain, AI that reads invoices, lead generation and hiring, each drawn as a live
+                  blueprint.
+                </p>
               </div>
-
-              {/* Bottom indicators absolute-like layout or footer */}
-              <div className="lg:hidden w-full flex justify-between items-center text-slate-400 border-t border-slate-100 pt-4 mt-2">
-                <span className="text-[9px] font-bold uppercase tracking-wider">Digital Transformation</span>
-                <ChevronRight className="w-4 h-4" />
-              </div>
-            </motion.button>
-
+              <span className="relative z-10 font-semibold text-white underline decoration-marigold decoration-2 underline-offset-4 group-hover:decoration-white">
+                Explore our work
+              </span>
+            </Link>
           </div>
         </div>
       </section>
 
+      {/* How we work: a real sequence, so it is numbered */}
+      <section className="bg-[#F4F6FA] border-b border-rule">
+        <div className={`${sectionPad} space-y-12`}>
+          <h2 className={`${h2Class} max-w-2xl`}>How we work with you</h2>
+          <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <li key={s.title} className="space-y-3">
+                <span className="block font-display font-bold text-leaf text-5xl leading-none">{i + 1}</span>
+                <h3 className="font-heading font-bold text-ink text-xl">{s.title}</h3>
+                <p className="text-body leading-relaxed">{s.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-      {/* SECTION 6: Why Choose M2P Nexus */}
-      <section className="py-16 md:py-24 bg-white border-b border-brand-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
-          <div className="space-y-4 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-brand-primary font-heading">
-              Why Choose M2P Nexus
-            </h2>
-            <p className="text-lg text-brand-text">
-              We combine enterprise expertise with a regional understanding to deliver high-yield partnership experiences.
+      {/* The founders' commitments, as a signed pledge */}
+      <Promises />
+
+      {/* Objections, answered with confirmed facts only */}
+      <Faq />
+
+      {/* Why we exist, from the brand story */}
+      <section className="bg-white border-b border-rule">
+        <div className={`${sectionPad} grid gap-12 lg:grid-cols-12 lg:items-center`}>
+          <figure className="lg:col-span-4">
+            <blockquote className="relative rounded-3xl bg-ink p-8 text-white shadow-lift">
+              <span aria-hidden="true" className="absolute -top-6 left-6 font-display text-8xl leading-none text-marigold">&ldquo;</span>
+              <p className="relative font-heading text-xl leading-snug sm:text-2xl">
+                We don&rsquo;t just build software. We build business success.
+              </p>
+            </blockquote>
+            <figcaption className="mt-5 pl-2">
+              <span className="block font-[family-name:var(--font-hand)] text-3xl text-[#2B3A8C] -rotate-2">Maruthu Pandi PT</span>
+              <span className="mt-1 block text-sm text-body">Founder &amp; Director, M2P Nexus</span>
+            </figcaption>
+          </figure>
+          <div className="lg:col-span-8 space-y-6 max-w-2xl">
+            <h2 className={h2Class}>Why we started M2P Nexus</h2>
+            <p className="text-lg text-body leading-relaxed">
+              Large companies can afford consultants, software vendors, marketing agencies, HR firms and AI experts. Most small businesses can&rsquo;t, so they are left guessing which software to buy, how to hire well, or how to get customers online.
+            </p>
+            <p className="text-lg text-body leading-relaxed">
+              We built M2P Nexus to close that gap: one partner that brings technology, people and growth together, and stays with you for the long run.
+            </p>
+            <p>
+              <Link to="/founder" className={textLink}>
+                Meet the founders
+              </Link>
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-            {[
-              { title: 'Business First Thinking', desc: 'We do not build technology for technology’s sake. Our architectures are modeled strictly around your operations to protect your capital and generate tangible cashflow efficiency.', icon: ShieldCheck },
-              { title: 'Deep Technology Expertise', desc: 'With a foundation across .NET, Node.js, React, and Python, we build high-capacity databases and custom ERPs that support critical daily manufacturing pipelines.', icon: Laptop },
-              { title: 'Startup & SME Friendly', desc: 'No bloated enterprise billing or lengthy sales loops. We deliver rapid, cost-effective deployments tailored for SMEs and agile startup frameworks.', icon: Rocket },
-              { title: 'AI Innovation', desc: 'We help you stay ahead by implementing custom AI models, neural indexing, and operational report automation, unlocking insights hidden in logs.', icon: Brain },
-              { title: 'Regional Understanding', desc: 'We understand local languages and regional trade dynamics, enabling us to build bilingual software (Tamil/English) that workforce teams adopt effortlessly.', icon: Users },
-              { title: 'Long-Term Partnership', desc: 'We do not believe in transactional consultancies. M2P Nexus acts as your virtual CTO, supporting and scaling with your enterprise as your business expands.', icon: ShieldCheck }
-            ].map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={idx}
-                  className="bg-brand-section border border-brand-border p-8 rounded-lg hover:border-brand-secondary/40 transition-colors space-y-4"
-                >
-                  <div className="w-12 h-12 bg-white border border-brand-border rounded flex items-center justify-center text-brand-secondary">
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-lg font-bold text-brand-primary font-heading">{item.title}</h3>
-                  <p className="text-sm text-brand-text leading-relaxed">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
-      {/* SECTION 7: Call To Action */}
-      <section className="bg-brand-primary text-white py-16 md:py-20 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-secondary/40 to-transparent pointer-events-none"></div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <h2 className="text-3xl md:text-5xl font-extrabold font-heading">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Discuss your requirements directly with our technology team. Get custom consultations for steel ERPs, billing applications, AI automation, or technical talent recruitment.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-2">
-            <a
-              href="tel:+919944283316"
-              className="bg-brand-secondary text-white hover:bg-slate-800 border border-slate-700 px-8 py-3.5 rounded-md font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Phone className="w-4 h-4 text-brand-accent" />
-              Call Now
-            </a>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#25D366] text-white hover:bg-[#20ba59] px-8 py-3.5 rounded-md font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-4 h-4 fill-current">
-                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.7-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
-              </svg>
-              WhatsApp Us
-            </a>
-            <a
-              href={emailUrl}
-              className="border border-slate-700 hover:border-slate-500 hover:bg-slate-800 text-white px-8 py-3.5 rounded-md font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Mail className="w-4 h-4 text-brand-accent" />
-              Email Us
-            </a>
-          </div>
-        </div>
-      </section>
+      <ClosingCta
+        questions={[
+          'Can you move my paper bills to Tamil and English billing software?',
+          'Can AI read my supplier invoices for me?',
+          'How do I get more enquiries from Google?',
+        ]}
+      />
     </>
   );
 }
